@@ -13,4 +13,9 @@ delete src folder
 
 > someone knowing better way how to do it?
 
-## 
+## Setup database
+
+create file database/database.sqlite (can be empty) change in file .env value for DB_CONNECTION to be sqlite and comment other lines below.
+
+Run `php artisan migrate`
+
