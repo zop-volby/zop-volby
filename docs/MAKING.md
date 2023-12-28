@@ -19,3 +19,11 @@ create file database/database.sqlite (can be empty) change in file .env value fo
 
 Run `php artisan migrate`
 
+## Adding Breeze to handle user infrastructure
+
+composer require laravel/breeze --dev
+php artisan breeze:install blade
+php artisan migrate
+npm install
+
+
