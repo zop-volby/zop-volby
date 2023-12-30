@@ -26,4 +26,21 @@ php artisan breeze:install blade
 php artisan migrate
 npm install
 
+## Starting app
+
+Create cmd file (or bash if you like it)
+
+```
+start php artisan serve
+start npm run dev
+start http://localhost:8000
+```
+
+## Adding social logins
+
+composer require laravel/socialite
+
+Follow https://support.google.com/cloud/answer/6158849?hl=en to get client ID for Google 
+
+Add Google to config/services.php
 
