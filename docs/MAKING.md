@@ -46,3 +46,10 @@ Follow https://support.google.com/cloud/answer/6158849?hl=en to get client ID fo
 
 Add Google to config/services.php
 
+## Starting deployment file
+
+Copied from another repo
+It requires changes in composer.json: https://github.com/zop-volby/zop-volby/commit/47bc3ba5ca394b1632dfd13b0a7934bccc48ef7b
+File .env has to get database connection
+
+Also let's remove Tailwind and bring Bootstrap in instead
