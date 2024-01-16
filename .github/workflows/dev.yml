@@ -1,0 +1,61 @@
+name: Developer Workflow
+
+on:
+  push:
+    branches: [ "develop" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Client Code
+        run: npm run build
+
+      - name: FTP Deploy
+        # You may pin to the exact commit or the version.
+        # uses: SamKirkland/FTP-Deploy-Action@8a24039354ee91000cb948cb4a1dbdf1a1b94a3c
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: replikant3692.thinline.cz
+          username: burger_software
+          password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
+          port: 21
+          protocol: ftp
+          server-dir: zop-volby.burger.software/
+          exclude: | 
+            .git/**
+            .github/**
+            **/tests/**
+            **/node_modules/**
+            **/vendor/**
+
+      - name: Run Deployment Script on Server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            cd zop-volby.burger.software
+            composer update
+          host: replikant3692.thinline.cz
+          port: 2736
+          username: burger_software
+          password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
+
+      - name: Run migrations on server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            cd zop-volby.burger.software
+            php artisan -- migrate --force
+          host: replikant3692.thinline.cz
+          port: 2736
+          username: burger_software
+          password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}

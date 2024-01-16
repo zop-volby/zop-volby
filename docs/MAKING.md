@@ -26,6 +26,8 @@ php artisan breeze:install blade
 php artisan migrate
 npm install
 
+Uncomment memory database usage in phpunit.xml, otherwise tests will delete your db.
+
 ## Starting app
 
 Create cmd file (or bash if you like it)
