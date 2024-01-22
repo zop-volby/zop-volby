@@ -6,6 +6,7 @@
 
         <title>ŽOP Volby</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -13,19 +14,21 @@
     </head>
     <body class="">
         <div class="">
-        <div class="navbar navbar-expand-sm bg-body-tertiary">
+            <div class="navbar navbar-expand-sm bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
                         ŽOP Volební aplikace
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarId" aria-controls="navbarId" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>                    
                 </div>
             </div>
 
             <div class="container">
+                <div class="row mt-4">
+                    <div class="col">
+                        <img src="{{ asset('img/banner.jpg') }}" class="w-100 img-fluid rounded" alt="Welcome to the cloud">
+                    </div>
+                </div>
                 <div class="row mt-4">
                     <div class="col text-center">
                         <h1>ŽOP Volební aplikace</h1>

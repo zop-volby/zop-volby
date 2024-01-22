@@ -53,3 +53,4 @@ It requires changes in composer.json: https://github.com/zop-volby/zop-volby/com
 File .env has to get database connection
 
 Also let's remove Tailwind and bring Bootstrap in instead
+
