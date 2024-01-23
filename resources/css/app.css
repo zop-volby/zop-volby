@@ -3,3 +3,10 @@
     margin: 0 auto;
 }
 
+form {
+    & > div {
+        margin-top: 1.5rem;
+    }
+}
+
+
