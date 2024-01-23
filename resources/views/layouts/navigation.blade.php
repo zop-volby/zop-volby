@@ -6,6 +6,8 @@
             <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
                 ŽOP Volební aplikace
+                -
+                {{ Election::find(1)->name }}
             </a>
 
             <!-- Hamburger -->

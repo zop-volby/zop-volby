@@ -33,7 +33,7 @@
                     <div class="col text-center">
                         <h1>ŽOP Volební aplikace</h1>
                         <p>Vítejte ve volební aplikaci Židovské obce v Praze.</p>
-                        <p>Nebližší volby budou: <b>cvičné volby březen 2024</b></p>
+                        <p>Nebližší volby budou: <b>{{ Election::find(1)->name }}</b></p>
                     </div>
                 </div>
 
