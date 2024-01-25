@@ -5,8 +5,6 @@
             <!-- Logo -->
             <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
-                ŽOP Volební aplikace
-                -
                 {{ Election::find(1)->name }}
             </a>
 
@@ -18,8 +16,11 @@
             <!-- Navigation Links -->
             <div class="collapse navbar-collapse" id="navbarId">
                 <ul class="navbar-nav">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('election.edit')" :active="request()->routeIs('election.edit')">
+                        {{ __('Volby') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        {{ __('Uživatelé') }}
                     </x-nav-link>
                 </ul>               
                 <ul class="navbar-nav ms-auto">
@@ -27,9 +28,9 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-end">
                             <x-nav-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
+                                {{ __('Profil') }}
                             </x-nav-dropdown-link>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
@@ -38,7 +39,7 @@
                                 <x-nav-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Odhlásit') }}
                                 </x-nav-dropdown-link>
                             </form>
                         </ul>                                

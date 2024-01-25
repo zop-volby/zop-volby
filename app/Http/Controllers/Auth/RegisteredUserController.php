@@ -20,6 +20,13 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+        if (User::count() > 0) {
+            $user = Auth::user();
+            if (!$user || !$user->isAdmin) {
+                abort(403, "You are not authorized to create new users.");
+            }
+        }
+
         return view('auth.register');
     }
 
@@ -30,6 +37,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        if (User::count() > 0 && !$request->user()->isAdmin) {
+            abort(403, "You are not authorized to create new users.");
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -39,6 +50,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'is_admin' => 1,
             //'password' => Hash::make($request->password),
         ]);
 

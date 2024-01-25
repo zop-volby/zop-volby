@@ -18,7 +18,7 @@
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
-                        ŽOP Volební aplikace
+                        {{ Election::find(1)->name }}
                     </a>
                 </div>
             </div>
@@ -31,9 +31,9 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col text-center">
-                        <h1>ŽOP Volební aplikace</h1>
+                        <h1>{{ Election::find(1)->name }}</h1>
                         <p>Vítejte ve volební aplikaci Židovské obce v Praze.</p>
-                        <p>Nebližší volby budou: <b>{{ Election::find(1)->name }}</b></p>
+                        <p>Nebližší volby budou: <b>{{ Election::find(1)->get_datetime() }}</b></p>
                     </div>
                 </div>
 

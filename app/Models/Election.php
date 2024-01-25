@@ -23,4 +23,8 @@ class Election extends Model
         'start_at',
         'phase',
     ];
+
+    public function get_datetime() {
+        return date('d. m. Y H:i', strtotime($this->start_at));
+    }
 }
