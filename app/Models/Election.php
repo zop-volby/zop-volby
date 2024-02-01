@@ -24,6 +24,11 @@ class Election extends Model
         'phase',
     ];
 
+    public function get_header() {
+        $phase_label = __('election.phase.' . $this->phase);
+        return $this->name . ' | ' . $phase_label;
+    }
+
     public function get_datetime() {
         return date('d. m. Y H:i', strtotime($this->start_at));
     }

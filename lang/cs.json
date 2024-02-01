@@ -1,0 +1,8 @@
+{
+    "election.phase.preparation": "Příprava",
+    "election.phase.digital-voting": "Elektronické hlasování",
+    "election.phase.mail-voting": "Listinné hlasování",
+    "election.phase.inperson-voting": "Prezenční hlasování",
+    "election.phase.result-processing": "Zpracování výsledků",
+    "election.phase.finished": "Volby ukončeny"
+}

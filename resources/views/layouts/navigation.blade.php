@@ -5,7 +5,7 @@
             <!-- Logo -->
             <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
-                {{ Election::find(1)->name }} | {{ __(Election::find(1)->phase) }}
+                {{ Election::find(1)->get_header() }}
             </a>
 
             <!-- Hamburger -->
