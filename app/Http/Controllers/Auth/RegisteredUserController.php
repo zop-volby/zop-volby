@@ -22,8 +22,11 @@ class RegisteredUserController extends Controller
     {
         if (User::count() > 0) {
             $user = Auth::user();
-            if (!$user || !$user->isAdmin) {
-                abort(403, "You are not authorized to create new users.");
+            if (!$user) {
+                abort(403, "You need to be authenticated to create new users.");
+            }
+            if (!($user->is_admin)) {
+                abort(403, "User $user is not admin.");
             }
         }
 
@@ -37,8 +40,16 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        if (User::count() > 0 && !$request->user()->isAdmin) {
-            abort(403, "You are not authorized to create new users.");
+        $will_be_admin = 1;
+        if (User::count() > 0) {
+            $will_be_admin = 0;
+            $user = Auth::user();
+            if (!$user) {
+                abort(403, "You need to be authenticated to create new users.");
+            }
+            if (!($user->is_admin)) {
+                abort(403, "User $user is not admin.");
+            }
         }
 
         $request->validate([
@@ -50,14 +61,14 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'is_admin' => 1,
+            'is_admin' => $will_be_admin,
             //'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        //Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('users.index');
     }
 }
