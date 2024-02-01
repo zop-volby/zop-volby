@@ -19,6 +19,7 @@ class ElectionController extends Controller
         $model = Election::find(1);
         $model->name = $request->input('name');
         $model->start_at = $request->input('start_at');
+        $model->phase = $request->input('phase');
         $model->save();
         return view(RouteServiceProvider::HOME);
     }

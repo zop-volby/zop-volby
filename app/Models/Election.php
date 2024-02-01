@@ -27,4 +27,15 @@ class Election extends Model
     public function get_datetime() {
         return date('d. m. Y H:i', strtotime($this->start_at));
     }
+
+    public function get_phases() {
+        return [
+            ElectionPhases::PREPARATION,
+            ElectionPhases::DIGITAL_VOTING,
+            ElectionPhases::MAIL_VOTING,
+            ElectionPhases::INPERSON_VOTING,
+            ElectionPhases::RESULT_PROCESSING,
+            ElectionPhases::FINISHED,
+        ];
+    }
 }
