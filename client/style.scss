@@ -1,0 +1,29 @@
+.narrow-component {
+    max-width: 440px; 
+    margin: 0 auto;
+}
+
+.page-header {
+    padding: 1em;
+    background-color: #ccc;
+    border-bottom: 1px solid #777;
+}
+
+main {
+    border: 1px solid #aaa;
+    box-shadow: 0 0 7px #ccc;
+    border-radius: 10px;
+    margin: 1em;
+    padding: 1em;
+}
+
+form {
+    & > div {
+        margin-top: 1.5rem;
+    }
+}
+
+.search-bar {
+    width: 300px;
+    margin-right: 1em;
+}
