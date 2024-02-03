@@ -23,4 +23,9 @@ form {
     }
 }
 
+.search-bar {
+    width: 300px;
+    margin-right: 1em;
+}
+
 

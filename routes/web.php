@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ElectionController;
+use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -37,5 +38,7 @@ Route::middleware('auth')->group(function () {
 
 Route::post('users/{user}/activate', [UserController::class, 'activate'])->name('users.activate')->middleware('auth');
 Route::resource('users', UserController::class)->middleware('auth');
+
+Route::resource('nominees', NomineeController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

@@ -54,3 +54,32 @@ File .env has to get database connection
 
 Also let's remove Tailwind and bring Bootstrap in instead
 
+## Adding new entity
+
+First controller
+
+php artisan make:controller NomineeController --resource
+
+Then model
+
+php artisan make:model Nominee -m
+
+Then fill in generated migration
+and add the same properties to model
+and then run migration
+
+php artisan migrate
+
+Then add routes to web.php
+
+Route::resource('nominees', NomineeController::class)->middleware('auth');
+
+Then add link to navigation
+
+<x-nav-link :href="route('nominees.index')" :active="request()->routeIs('nominees.index')">
+    {{ __('Kandidáti') }}
+</x-nav-link>
+
+Then start filling the controller. 
+One method, one view.
+Index, Create, Edit.
