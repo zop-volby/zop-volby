@@ -5,9 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="row">
+    <div class="row mb-2">
         <div class="col">
             <nav class="nav justify-content-end">
+                <x-search-input id="search-bar"></x-search-input>
                 <x-primary-link :href="route('register')">{{ __('Nový uživatel') }}</x-primary-link>
             </nav>
         </div>
@@ -17,7 +18,7 @@
             @if ($users->isEmpty())
                 <x-alert-info>{{ __('No users found.') }}</x-alert-info>
             @else
-                <div class="table-responsive">
+                <div class="table-responsive" id="search-table">
                     <table class="table table-hover">
                         <thead>
                             <tr>
