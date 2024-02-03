@@ -18,7 +18,7 @@
             @if ($model->isEmpty())
                 <x-alert-info>{{ __('Doposud žádní kandidáti.') }}</x-alert-info>
             @else
-                <div class="table-responsive">
+                <div id="search-table" class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
