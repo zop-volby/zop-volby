@@ -13,4 +13,14 @@ class ElectionList extends Model
         'name',
         'max_votes',
     ];
+
+    public function nominees()
+    {
+        return $this->belongsToMany(Nominee::class);
+    }
+
+    public function getAllNominees()
+    {
+        return Nominee::orderBy('last_name')->get();
+    }
 }

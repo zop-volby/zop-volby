@@ -25,6 +25,7 @@
                                 <th>{{ __('ID') }}</th>
                                 <th>{{ __('Název') }}</th>
                                 <th>{{ __('Počet hlasů') }}</th>
+                                <th>{{ __('Počet kandidátů') }}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -34,8 +35,10 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->max_votes }}</td>
+                                    <td>{{ $item->nominees->count() }}</td>
                                     <td class="text-end">
                                         <x-secondary-link :href="route('lists.edit', ['list'=> $item->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        <x-secondary-link :href="route('lists.nominees', ['list'=> $item->id])"><i class="bi bi-card-list"></i></x-secondary-link>
                                     </td>
                                 </tr>
                             @endforeach

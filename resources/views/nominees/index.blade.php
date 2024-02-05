@@ -28,6 +28,7 @@
                                 <th>{{ __('Rok narození') }}</th>
                                 <th>{{ __('Biografie') }}</th>
                                 <th>{{ __('Odkaz na stránky') }}</th>
+                                <th>{{ __('Kandidátní listiny') }}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -42,6 +43,11 @@
                                     <td>
                                         {{ $item->link_to_page }}
                                         <a target="_blank" href="{{ $item->link_to_page }}"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    </td>
+                                    <td>
+                                        @foreach($item->electionLists as $list)
+                                            <span class="badge bg-primary">{{ $list->name }}</span>
+                                        @endforeach
                                     </td>
                                     <td class="text-end">
                                         <x-secondary-link :href="route('nominees.edit', ['nominee'=> $item->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>

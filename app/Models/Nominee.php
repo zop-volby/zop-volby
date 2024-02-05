@@ -16,4 +16,14 @@ class Nominee extends Model
         'biography',
         'link_to_page',
     ];
+
+    public function electionLists()
+    {
+        return $this->belongsToMany(ElectionList::class);
+    }
+
+    public function getAllElectionLists()
+    {
+        return ElectionList::all();
+    }
 }

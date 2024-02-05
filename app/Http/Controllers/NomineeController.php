@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nominee;
+use App\Models\ElectionList;
 use Illuminate\Http\Request;
 
 class NomineeController extends Controller
@@ -61,6 +62,10 @@ class NomineeController extends Controller
         $model = Nominee::findOrFail($id);
         $model->fill($request->all());
         $model->save();
+
+        $newLists = $request->input('electionLists');
+        $model->electionLists()->sync($newLists);
+
         return redirect()->route('nominees.index');
     }
 

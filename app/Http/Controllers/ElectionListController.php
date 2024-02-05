@@ -71,4 +71,10 @@ class ElectionListController extends Controller
     {
         //
     }
+
+    public function nominees(string $id)
+    {
+        $model = ElectionList::findOrFail($id);
+        return view('lists.nominees', compact('model'));
+    }
 }
