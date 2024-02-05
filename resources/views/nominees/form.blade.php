@@ -5,7 +5,7 @@
 </div>
 
 <div>
-    <x-input-label for="last_name" :value="__('Příjmené')" />
+    <x-input-label for="last_name" :value="__('Příjmení')" />
     <x-text-input id="last_name" name="last_name" type="text" required autofocus autocomplete="last_name" value="{{$model->last_name}}"/>
     <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
 </div>

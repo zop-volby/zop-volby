@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('nominees.index')" :active="request()->routeIs('nominees.index')">
                         {{ __('Kandidáti') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('lists.index')" :active="request()->routeIs('lists.index')">
+                        {{ __('Kandidátní listiny') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('Uživatelé') }}
                     </x-nav-link>

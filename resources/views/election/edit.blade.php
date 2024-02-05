@@ -32,7 +32,7 @@
         </div>
 
         <div>
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Uložit') }}</x-primary-button>
         </div>
     </form>
 </x-app-layout>
