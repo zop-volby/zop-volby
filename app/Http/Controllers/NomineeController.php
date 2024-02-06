@@ -34,6 +34,10 @@ class NomineeController extends Controller
         $model = new Nominee();
         $model->fill($request->all());
         $model->save();
+
+        $newLists = $request->input('electionLists');
+        $model->electionLists()->sync($newLists);
+
         return redirect()->route('nominees.index');
     }
 
@@ -74,6 +78,9 @@ class NomineeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $model = Nominee::findOrFail($id);
+        $model->electionLists()->detach();
+        $model->delete();
+        return redirect()->route('nominees.index');
     }
 }

@@ -69,7 +69,10 @@ class ElectionListController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $model = ElectionList::findOrFail($id);
+        $model->nominees()->detach();
+        $model->delete();
+        return redirect()->route('lists.index');
     }
 
     public function get_nominees(string $id)

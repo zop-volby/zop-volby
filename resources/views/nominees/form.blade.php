@@ -40,6 +40,9 @@
 </div>
 
 <div>
-    <x-primary-button>{{ __('Save') }}</x-primary-button>
-    <x-secondary-link :href="route('nominees.index')">{{ __('Cancel') }}</x-secondary-link>
+    <x-primary-button>{{ __('Uložit') }}</x-primary-button>
+    <x-secondary-link :href="route('nominees.index')">{{ __('Zpět') }}</x-secondary-link>
+    @if (isset($model->id))
+        <x-danger-link data-bs-toggle="modal" data-bs-target="#deleteModal">{{ __('Delete') }}</x-danger-link>
+    @endif
 </div>
