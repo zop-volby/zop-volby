@@ -23,4 +23,12 @@ class ElectionList extends Model
     {
         return Nominee::orderBy('last_name')->get();
     }
+
+    public function getAssignedNominees() {
+        return $this->nominees()->orderBy('last_name')->get();
+    }
+    public function getAvailableNominees() {
+        return Nominee::whereNotIn('id', $this->nominees->pluck('id'))->orderBy('last_name')->get();
+    }
+
 }

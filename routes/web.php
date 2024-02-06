@@ -42,7 +42,8 @@ Route::resource('users', UserController::class)->middleware('auth');
 
 Route::resource('nominees', NomineeController::class)->middleware('auth');
 
-Route::get('lists/{list}/nominees', [ElectionListController::class, 'nominees'])->name('lists.nominees')->middleware('auth');
+Route::get('lists/{list}/nominees', [ElectionListController::class, 'get_nominees'])->name('lists.nominees')->middleware('auth');
+Route::put('lists/{list}/nominees', [ElectionListController::class, 'put_nominees'])->name('lists.nominees')->middleware('auth');
 Route::resource('lists', ElectionListController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

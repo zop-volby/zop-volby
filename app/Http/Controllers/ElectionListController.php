@@ -72,9 +72,16 @@ class ElectionListController extends Controller
         //
     }
 
-    public function nominees(string $id)
+    public function get_nominees(string $id)
     {
         $model = ElectionList::findOrFail($id);
         return view('lists.nominees', compact('model'));
+    }
+
+    public function put_nominees(Request $request, string $id)
+    {
+        $model = ElectionList::findOrFail($id);
+        $model->nominees()->sync($request->nominees);
+        return redirect()->route('lists.index');
     }
 }
