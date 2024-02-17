@@ -5,6 +5,7 @@ use App\Http\Controllers\ElectionController;
 use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ElectionListController;
+use App\Http\Controllers\VoterController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -45,5 +46,9 @@ Route::resource('nominees', NomineeController::class)->middleware('auth');
 Route::get('lists/{list}/nominees', [ElectionListController::class, 'get_nominees'])->name('lists.nominees')->middleware('auth');
 Route::put('lists/{list}/nominees', [ElectionListController::class, 'put_nominees'])->name('lists.nominees')->middleware('auth');
 Route::resource('lists', ElectionListController::class)->middleware('auth');
+
+Route::get('voters/load', [VoterController::class, 'get_load'])->name('voters.load')->middleware('auth');
+Route::post('voters/load', [VoterController::class, 'post_load'])->name('voters.load')->middleware('auth');
+Route::resource('voters', VoterController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
