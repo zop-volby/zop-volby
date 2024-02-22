@@ -25,9 +25,12 @@
                 </div>
             @else
                 @foreach ($voters as $voter)
-                    <div class="search-item col-4 col-md-2 col-xl-1">
-                        <div class="border border-primary rounded p-2 mb-1">
-                            {{ $voter->voter_code }}
+                    <div class="search-item col-4 col-md-3 col-xl-2">
+                        <div class="search-item-content {{$voter->is_active ? 'active' : 'inactive' }}">
+                            <div class="d-flex">
+                                <div class="flex-grow-1">{{ $voter->voter_code }}</div>
+                                <x-secondary-link class="btn-sm" :href="route('voters.activate', ['voter' => $voter->id])"><i class="bi bi-check-square"></i></x-secondary-link>
+                            </div>
                         </div>
                     </div>
                 @endforeach

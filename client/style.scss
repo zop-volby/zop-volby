@@ -33,3 +33,17 @@ form {
         width: 100%;
     }
 }
+
+.search-item-content {
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin-top: 10px;
+
+    &.active {
+        background-color: white;
+    }
+    &.inactive {
+        background-color: #ccc;
+    }
+}

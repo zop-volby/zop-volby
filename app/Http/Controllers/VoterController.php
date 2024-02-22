@@ -56,4 +56,10 @@ class VoterController extends Controller
 
         return str_pad($input, 8, '0', STR_PAD_LEFT);
     }
+
+    public function activate(Voter $voter) {
+        $voter->is_active = $voter->is_active ? false : true;
+        $voter->save();
+        return redirect()->route('voters.index');
+    }
 }

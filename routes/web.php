@@ -47,6 +47,7 @@ Route::get('lists/{list}/nominees', [ElectionListController::class, 'get_nominee
 Route::put('lists/{list}/nominees', [ElectionListController::class, 'put_nominees'])->name('lists.nominees')->middleware('auth');
 Route::resource('lists', ElectionListController::class)->middleware('auth');
 
+Route::get('voters/activate/{voter}', [VoterController::class, 'activate'])->name('voters.activate')->middleware('auth');
 Route::get('voters/load', [VoterController::class, 'get_load'])->name('voters.load')->middleware('auth');
 Route::post('voters/load', [VoterController::class, 'post_load'])->name('voters.load')->middleware('auth');
 Route::resource('voters', VoterController::class)->middleware('auth');
