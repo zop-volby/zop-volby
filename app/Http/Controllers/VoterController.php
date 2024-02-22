@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Voter;
 
-function normalize_second_factor($input) {
-    return $input;
-}
-
 class VoterController extends Controller
 {
     public function index() {
@@ -27,11 +23,19 @@ class VoterController extends Controller
 
         $file = $request->file('voters_file');
         $created = 0;
+        $failed = 0;
         if (($handle = fopen($file->getRealPath(), "r")) !== false) {
             while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+                try {
+                    $hash = VoterController::normalize_second_factor($data[1]);
+                }
+                catch (\InvalidArgumentException $e) {
+                    $failed++;
+                    continue;
+                }
                 $voter = Voter::firstOrCreate([
                     'voter_code' => $data[0],
-                    'secret_hash' => normalize_second_factor($data[1])
+                    'secret_hash' => password_hash($hash, PASSWORD_DEFAULT)                
                 ]);
                 if ($voter->wasRecentlyCreated) {
                     $created++;
@@ -42,6 +46,14 @@ class VoterController extends Controller
 
         return redirect()
                     ->route('voters.index')
-                    ->with('status', 'Voliči byli úspěšně nahráni. Počet nových záznamů: ' . $created);
+                    ->with('status', 'Voliči byli úspěšně nahráni. Počet nových záznamů: ' . $created . ', počet chyb: ' . $failed);
+    }
+
+    public static function normalize_second_factor($input) {
+        if (!is_numeric($input)) {
+            throw new \InvalidArgumentException('Input must be numeric');
+        }
+
+        return str_pad($input, 8, '0', STR_PAD_LEFT);
     }
 }
