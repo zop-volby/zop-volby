@@ -9,7 +9,9 @@
         <div class="col">
             <nav class="nav justify-content-end">
                 <x-search-input id="search-bar"></x-search-input>
-                <x-primary-link :href="route('register')">{{ __('Nový uživatel') }}</x-primary-link>
+                @can('admin')
+                    <x-primary-link :href="route('register')">{{ __('Nový uživatel') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>
@@ -47,10 +49,12 @@
                                         <td></td>
                                     @endif
                                     <td class="text-end">
-                                        <form method="POST" style="display:inline-block;" action="{{ route('users.activate', ['user'=> $user->id]) }}">
-                                            @csrf
-                                            <x-secondary-button type="submit"><i class="bi bi-check-square"></i></x-secondary-link>
-                                        </form>
+                                        @can('admin')
+                                            <form method="POST" style="display:inline-block;" action="{{ route('users.activate', ['user'=> $user->id]) }}">
+                                                @csrf
+                                                <x-secondary-button type="submit"><i class="bi bi-check-square"></i></x-secondary-link>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -9,7 +9,9 @@
         <div class="col">
             <nav class="nav justify-content-end">
                 <x-search-input id="search-bar"></x-search-input>
-                <x-primary-link :href="route('lists.create')">{{ __('Nová listina') }}</x-primary-link>
+                @can('preparation')
+                    <x-primary-link :href="route('lists.create')">{{ __('Nová listina') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>
@@ -37,7 +39,9 @@
                                     <td>{{ $item->max_votes }}</td>
                                     <td>{{ $item->nominees->count() }}</td>
                                     <td class="text-end">
-                                        <x-secondary-link :href="route('lists.edit', ['list'=> $item->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @can('preparation')
+                                            <x-secondary-link :href="route('lists.edit', ['list'=> $item->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @endcan
                                         <x-secondary-link :href="route('lists.nominees', ['list'=> $item->id])"><i class="bi bi-card-list"></i></x-secondary-link>
                                     </td>
                                 </tr>

@@ -31,7 +31,9 @@
         </div>
 
         <div>
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            @can('preparation')
+                <x-primary-button>{{ __('Save') }}</x-primary-button>   
+            @endcan
             <x-secondary-link :href="route('lists.index')">{{ __('Cancel') }}</x-secondary-link>
         </div>
     </form>

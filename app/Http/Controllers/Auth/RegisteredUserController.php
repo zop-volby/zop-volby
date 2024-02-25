@@ -26,7 +26,7 @@ class RegisteredUserController extends Controller
                 abort(403, "You need to be authenticated to create new users.");
             }
             if (!($user->is_admin)) {
-                abort(403, "User $user is not admin.");
+                abort(403, "User $user->email is not admin.");
             }
         }
 

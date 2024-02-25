@@ -9,7 +9,9 @@
         <div class="col">
             <nav class="nav justify-content-end">
                 <x-search-input id="search-bar"></x-search-input>
-                <x-primary-link :href="route('nominees.create')">{{ __('Nový kandidát') }}</x-primary-link>
+                @can('preparation')
+                    <x-primary-link :href="route('nominees.create')">{{ __('Nový kandidát') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>
@@ -50,7 +52,9 @@
                                         @endforeach
                                     </td>
                                     <td class="text-end">
-                                        <x-secondary-link :href="route('nominees.edit', ['nominee'=> $item->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @can('preparation')
+                                            <x-secondary-link :href="route('nominees.edit', ['nominee'=> $item->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

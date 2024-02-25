@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\ElectionList;
 
 class ElectionListController extends Controller
@@ -21,6 +22,7 @@ class ElectionListController extends Controller
      */
     public function create()
     {
+        Gate::authorize('preparation');
         $model = new ElectionList();
         return view('lists.create', compact('model'));
     }
@@ -30,6 +32,7 @@ class ElectionListController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('preparation');
         $model = new ElectionList();
         $model->fill($request->all());
         $model->save();
@@ -49,6 +52,7 @@ class ElectionListController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('preparation');
         $model = ElectionList::findOrFail($id);
         return view('lists.edit', compact('model'));
     }
@@ -58,6 +62,7 @@ class ElectionListController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        Gate::authorize('preparation');
         $model = ElectionList::findOrFail($id);
         $model->fill($request->all());
         $model->save();
@@ -69,6 +74,7 @@ class ElectionListController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('preparation');
         $model = ElectionList::findOrFail($id);
         $model->nominees()->detach();
         $model->delete();

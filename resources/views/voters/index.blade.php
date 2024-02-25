@@ -9,7 +9,9 @@
         <div class="col">
             <nav class="nav justify-content-end">
                 <x-search-input id="search-bar"></x-search-input>
-                <x-primary-link :href="route('voters.load')">{{ __('Nahrát voliče') }}</x-primary-link>
+                @can('preparation')
+                    <x-primary-link :href="route('voters.load')">{{ __('Nahrát voliče') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>
@@ -29,7 +31,9 @@
                         <div class="search-item-content {{$voter->is_active ? 'active' : 'inactive' }}">
                             <div class="d-flex">
                                 <div class="flex-grow-1">{{ $voter->voter_code }}</div>
-                                <x-secondary-link class="btn-sm" :href="route('voters.activate', ['voter' => $voter->id])"><i class="bi bi-check-square"></i></x-secondary-link>
+                                @can('admin')
+                                    <x-secondary-link class="btn-sm" :href="route('voters.activate', ['voter' => $voter->id])"><i class="bi bi-check-square"></i></x-secondary-link>
+                                @endcan
                             </div>
                         </div>
                     </div>

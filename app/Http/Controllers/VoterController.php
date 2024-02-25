@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Voter;
 
 class VoterController extends Controller
@@ -13,10 +14,12 @@ class VoterController extends Controller
     }
 
     public function get_load() {
+        Gate::authorize('preparation');
         return view('voters.load');
     }
 
     public function post_load(Request $request) {
+        Gate::authorize('preparation');
         $request->validate([
             'voters_file' => 'required|file|mimes:csv,txt'
         ]);
@@ -58,6 +61,7 @@ class VoterController extends Controller
     }
 
     public function activate(Voter $voter) {
+        Gate::authorize('admin');
         $voter->is_active = $voter->is_active ? false : true;
         $voter->save();
         return redirect()->route('voters.index');

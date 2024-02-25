@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\Election;
+use App\Models\ElectionPhases;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +25,26 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('admin', function ($user) {
+            return $user->is_admin;
+        });
+        Gate::define('preparation', function () {
+            return Election::find(1)->phase == ElectionPhases::PREPARATION;
+        });
+        Gate::define('digital-voting', function () {
+            return Election::find(1)->phase == ElectionPhases::DIGITAL_VOTING;
+        });
+        Gate::define('mail-voting', function () {
+            return Election::find(1)->phase == ElectionPhases::MAIL_VOTING;
+        });
+        Gate::define('inperson-voting', function () {
+            return Election::find(1)->phase == ElectionPhases::INPERSON_VOTING;
+        });
+        Gate::define('result-processing', function () {
+            return Election::find(1)->phase == ElectionPhases::RESULT_PROCESSING;
+        });
+        Gate::define('finished', function () {
+            return Election::find(1)->phase == ElectionPhases::FINISHED;
+        });
     }
 }
