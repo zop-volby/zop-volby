@@ -33,10 +33,23 @@
                     <div class="col text-center">
                         <h1>{{ Election::find(1)->name }}</h1>
                         <p>Vítejte ve volební aplikaci Židovské obce v Praze.</p>
-                        <p>Nebližší volby budou: <b>{{ Election::find(1)->get_datetime() }}</b></p>
                     </div>
                 </div>
-
+                @can('preparation')
+                    <div class="row mt-4">
+                        <div class="col text-center">
+                            <p>Nebližší volby budou: <b>{{ Election::find(1)->get_datetime() }}</b></p>
+                        </div>
+                    </div>
+                @endcan
+                @can('digital-voting')
+                    <div class="row mt-4">
+                        <div class="col text-center">
+                            <p>Digitální hlasování je otevřeno. Nejprve se přihlaste.</p>
+                            <p><x-primary-link href="{{ route('voting.index') }}">Přihlásit jako volič</x-primary-link></p>
+                        </div>
+                    </div>
+                @endcan
                 <div class="row mt-4">
                     <div class="col text-end">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})

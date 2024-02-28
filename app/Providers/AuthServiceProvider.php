@@ -28,22 +28,22 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin', function ($user) {
             return $user->is_admin;
         });
-        Gate::define('preparation', function () {
+        Gate::define('preparation', function ($user = null) {
             return Election::find(1)->phase == ElectionPhases::PREPARATION;
         });
-        Gate::define('digital-voting', function () {
+        Gate::define('digital-voting', function ($user = null) {
             return Election::find(1)->phase == ElectionPhases::DIGITAL_VOTING;
         });
-        Gate::define('mail-voting', function () {
+        Gate::define('mail-voting', function ($user = null) {
             return Election::find(1)->phase == ElectionPhases::MAIL_VOTING;
         });
-        Gate::define('inperson-voting', function () {
+        Gate::define('inperson-voting', function ($user = null) {
             return Election::find(1)->phase == ElectionPhases::INPERSON_VOTING;
         });
-        Gate::define('result-processing', function () {
+        Gate::define('result-processing', function ($user = null) {
             return Election::find(1)->phase == ElectionPhases::RESULT_PROCESSING;
         });
-        Gate::define('finished', function () {
+        Gate::define('finished', function ($user = null) {
             return Election::find(1)->phase == ElectionPhases::FINISHED;
         });
     }

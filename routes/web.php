@@ -6,6 +6,7 @@ use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ElectionListController;
 use App\Http\Controllers\VoterController;
+use App\Http\Controllers\VotingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -51,5 +52,8 @@ Route::get('voters/activate/{voter}', [VoterController::class, 'activate'])->nam
 Route::get('voters/load', [VoterController::class, 'get_load'])->name('voters.load')->middleware('auth');
 Route::post('voters/load', [VoterController::class, 'post_load'])->name('voters.load')->middleware('auth');
 Route::resource('voters', VoterController::class)->middleware('auth');
+
+Route::get('voting', [VotingController::class, 'index'])->name('voting.index');
+Route::post('voting', [VotingController::class, 'store'])->name('voting.store');
 
 require __DIR__.'/auth.php';
