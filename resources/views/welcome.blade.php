@@ -35,6 +35,13 @@
                         <p>Vítejte ve volební aplikaci Židovské obce v Praze.</p>
                     </div>
                 </div>
+                @if (config('voting.jwt_key') == '')
+                    <div class="row mt-4">
+                        <div class="col text-center">
+                            <x-alert-danger>Volební aplikace není správně nakonfigurována. Kontaktujte správce systému.</x-alert-danger>
+                        </div>
+                    </div>
+                @endif
                 @can('preparation')
                     <div class="row mt-4">
                         <div class="col text-center">

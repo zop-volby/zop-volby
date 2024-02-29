@@ -13,7 +13,7 @@
             <div class="narrow-component mt-4">
                 @include('voting.code_form')
             </div>
-        @elseif ($model->secret_value == null)
+        @elseif ($model->secret_token == null)
             <div class="narrow-component mt-4">
                 @include('voting.secret_form')
             </div>
