@@ -1,6 +1,5 @@
 <x-guest-layout>
     <div class="narrow-component">
-        <img src="{{ asset('img/banner.jpg') }}" class="img-fluid rounded mb-4" alt="Welcome to the cloud">
         <form method="POST" action="{{ route('register') }}">
             @csrf
 

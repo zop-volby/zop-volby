@@ -57,6 +57,7 @@
     </div>
 
     <div class="text-end mt-3">
+        <!-- <x-secondary-button type="submit" value="draft">Uložit rozpracované</x-secondary-button> -->
         <x-primary-button type="button" data-bs-toggle="modal" data-bs-target="#confirmVoting">
             Odeslat
             <i class="bi bi-arrow-right-circle-fill"></i>
@@ -77,7 +78,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                    <button type="submit" class="btn btn-primary">Odeslat</button>
+                    <button type="submit" class="btn btn-primary" value="save">Odeslat</button>
                 </div>
             </div>
         </div>
