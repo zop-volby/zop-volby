@@ -5,8 +5,8 @@
         </div>
     </div>
 
-    <input type="hidden" name="voter_code" value="{{$model->voter_code}}">
-    <input type="hidden" name="secret_token" value="{{$model->secret_token}}">
+    <input type="hidden" name="voter_code" id="voter_code" value="{{$model->voter_code}}">
+    <input type="hidden" name="secret_token" id="secret_token" value="{{$model->secret_token}}">
 
     <div class="row mt-4">
         <div class="col text-center">
@@ -20,21 +20,33 @@
 
     <div class="accordion mt-4" id="electionLists">
     @foreach ($model->getLists() as $list)
-        <div class="accordion-item">
+        <div class="accordion-item voting-list" data-list="{{ $list->id }}" data-maxvotes="{{ $list->max_votes }}">
             <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $list->id }}" aria-expanded="true" aria-controls="collapse{{ $list->id }}">
                     {{ $list->name }} 
-                    <span class="ms-2 badge bg-primary"><span class="selected">0</span> / {{ $list->max_votes }}</span>
+                    <span class="ms-2 badge bg-primary" id="badge_{{ $list->id }}"><span id="votes_{{ $list->id }}">0</span> / {{ $list->max_votes }}</span>
                 </button>
             </h2>
+            <input type="hidden" name="list_{{ $list->id }}" id="list_{{ $list->id }}" value="">
             <div id="collapse{{ $list->id }}" class="accordion-collapse collapse show" data-bs-parent="#electionList">
                 <div class="accordion-body">
-                    <ul class="list-group list-group-numbered">
+                    <ul class="list-group">
                     @foreach ($model->getNominees($list->id) as $nominee)
-                        <li class="list-group-item text-start">
-                            {{ $nominee->first_name }} {{ $nominee->last_name }} *{{ $nominee->year_of_birth }}</br>
-                            {{ $nominee->biography }}
-                            <a target="_blank" href="{{ $nominee->link_to_page }}"><i class="bi bi-box-arrow-up-right"></i></a>
+                        <li class="list-group-item text-start voting-nominee" data-nominee="{{ $nominee->id }}">
+                            <div class="d-flex">
+                                <div class="flex-grow-1">
+                                    <div>
+                                        {{ $nominee->first_name }} {{ $nominee->last_name }} *{{ $nominee->year_of_birth }}
+                                    </div>
+                                    <div>
+                                        {{ $nominee->biography }}
+                                        <a target="_blank" href="{{ $nominee->link_to_page }}"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    </div>
+                                </div>
+                                <div class="voting-button">
+                                    <i id="check_{{ $list->id }}_{{ $nominee->id }}" class="bi bi-square fs-2"></i>                                    
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                     </ul>

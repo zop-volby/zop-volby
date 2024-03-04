@@ -1,5 +1,10 @@
 import { BindSearchBar } from "./searchbar";
+import { BindVotingView } from "./voting";
 
 export function Main() {
-    BindSearchBar()
+    BindSearchBar();
+
+    if (document.getElementById('secret_token')) {
+        BindVotingView();
+    }
 }
