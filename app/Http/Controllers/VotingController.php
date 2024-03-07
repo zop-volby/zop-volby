@@ -38,11 +38,6 @@ class VotingController extends Controller
                     ->route('voting.index')
                     ->with('status', 'Vámi zadaný kód voliče není aktivní');
         }
-        if ($voter->voting_id) {
-            return redirect()
-                    ->route('voting.index')
-                    ->with('status', 'Vámi zadaný kód voliče už byl použit pro hlasování');
-        }
 
         $model = new Voting();
         $model->voter_code = $voter->voter_code;
@@ -54,7 +49,15 @@ class VotingController extends Controller
             // secret value was provided, we can let the user in
             $secret_value = VoterController::normalize_second_factor($request->secret_value);
             if (password_verify($secret_value, $voter->secret_hash)) {
-                return $this->start_voting($model);
+                if ($voter->voting_id != null) {
+                    $model->voting_id = $voter->voting_id;
+                    $model->load_ballots();
+                    return view('voting.result', compact('model'));
+                }
+                else {
+                    $this->start_voting($model);
+                    return view('voting.index', compact('model'));
+                }
             }
             else {
                 session(['status' => 'Vámi zadané členské číslo není správné']);
@@ -77,7 +80,6 @@ class VotingController extends Controller
             'exp' => time() + 60 * 60 * 12    // 12 hours
         ];
         $model->secret_token = JWT::encode($payload, $key, 'HS256');
-        return view('voting.index', compact('model'));
     }
 
     private function finish_voting($model, $request) {

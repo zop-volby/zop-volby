@@ -6,12 +6,35 @@ class Voting {
     public $voter_code;
     public $secret_token;
 
+    public $voting_id;
+
+    public $votes;
+    public $voting_time;
+
+    public function load_ballots() {
+        $ballots = Ballot::where('voting_id', $this->voting_id)->get();
+        $this->voting_time = date('d. m. Y H:i', strtotime($ballots->first()->created_at));
+
+        $this->votes = [];
+        foreach ($ballots as $ballot) {
+            $this->votes[$ballot->list_id] = $ballot->votes;
+        }
+    }
+
     public function getLists() {
         return ElectionList::all();
     }
 
     public function getNominees($list_id) {
         return ElectionList::find($list_id)->getAssignedNominees();
+    }
+
+    public function votes_count($list_id) {
+        return count(explode(',', $this->votes[$list_id]));
+    }
+
+    public function is_checked($list, $nominee) {
+        return str_contains($this->votes[$list], $nominee);
     }
 }
 
