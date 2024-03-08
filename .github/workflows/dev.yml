@@ -43,7 +43,7 @@ jobs:
         with:
           command: |
             cd zop-volby.burger.software
-            composer install
+            composer install --no-dev
           host: replikant3692.thinline.cz
           port: 2736
           username: burger_software
