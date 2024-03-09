@@ -42,7 +42,6 @@ jobs:
             .github/**
             **/tests/**
             **/node_modules/**
-            **/vendor/**
 
       # - name: Run Deployment Script on Server
       #   uses: garygrossgarten/github-action-ssh@release
