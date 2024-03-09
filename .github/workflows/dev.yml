@@ -43,17 +43,6 @@ jobs:
             **/tests/**
             **/node_modules/**
 
-      # - name: Run Deployment Script on Server
-      #   uses: garygrossgarten/github-action-ssh@release
-      #   with:
-      #     command: |
-      #       cd zop-volby.burger.software
-      #       composer install --no-dev
-      #     host: replikant3692.thinline.cz
-      #     port: 2736
-      #     username: burger_software
-      #     password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
-
       - name: Run migrations on server
         uses: garygrossgarten/github-action-ssh@release
         with:
