@@ -14,7 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Dependencies
+      - name: Install Server Dependencies
+        uses: php-actions/composer@v6
+        with:
+          dev: no
+          progress: yes
+
+      - name: Install Client Dependencies
         run: npm install
 
       - name: Build Client Code
@@ -38,16 +44,16 @@ jobs:
             **/node_modules/**
             **/vendor/**
 
-      - name: Run Deployment Script on Server
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: |
-            cd zop-volby.burger.software
-            composer install --no-dev
-          host: replikant3692.thinline.cz
-          port: 2736
-          username: burger_software
-          password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
+      # - name: Run Deployment Script on Server
+      #   uses: garygrossgarten/github-action-ssh@release
+      #   with:
+      #     command: |
+      #       cd zop-volby.burger.software
+      #       composer install --no-dev
+      #     host: replikant3692.thinline.cz
+      #     port: 2736
+      #     username: burger_software
+      #     password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
 
       - name: Run migrations on server
         uses: garygrossgarten/github-action-ssh@release
