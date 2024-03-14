@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 use App\Models\Voter;
+use App\Models\Ballot;
 
 class VoterController extends Controller
 {
@@ -50,6 +52,46 @@ class VoterController extends Controller
         return redirect()
                     ->route('voters.index')
                     ->with('status', 'Voliči byli úspěšně nahráni. Počet nových záznamů: ' . $created . ', počet chyb: ' . $failed);
+    }
+
+    public function get_scan() {
+        Gate::authorize('mail-voting');
+        return view('voters.scan');
+    }
+
+    public function post_scan(Request $request) {
+        Gate::authorize('mail-voting');
+        $request->validate([
+            'voter_code' => 'required'
+        ]);
+
+        $voter = Voter::where('voter_code', $request->voter_code)->first();
+        if (!$voter) {
+            return redirect()
+                        ->route('voters.scan')
+                        ->withErrors(['Volič s tímto kódem nebyl nalezen.']);
+        }
+
+        if ($voter->mail_voting) {
+            return redirect()
+                        ->route('voters.scan')
+                        ->withErrors(['Tento volič už bylo pro listinné hlasování načten.']);
+        }
+
+        DB::transaction(function () use ($voter) {
+            $voter->mail_voting = true;
+            $voter->save();
+
+            if ($voter->voting_id) {
+                $ballot = Ballot::where('voting_id', $voter->voting_id)->first();
+                $ballot->is_invalid = true;
+                $ballot->save();
+            }
+        });
+
+        return redirect()
+                    ->route('voters.scan')
+                    ->with('status', 'Volič byl úspěšně načten pro listinné hlasování.');
     }
 
     public static function normalize_second_factor($input) {

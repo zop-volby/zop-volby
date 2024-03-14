@@ -11,6 +11,7 @@ class Voter extends Model
 
     protected $fillable = [
         'voter_code',
-        'secret_hash'
+        'secret_hash',
+        'mail_voting'
     ];
 }

@@ -12,6 +12,9 @@
                 @can('preparation')
                     <x-primary-link :href="route('voters.load')">{{ __('Nahrát voliče') }}</x-primary-link>
                 @endcan
+                @can('mail-voting')
+                    <x-primary-link :href="route('voters.scan')">{{ __('Listinné hlasování') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>
@@ -32,8 +35,10 @@
                             <div class="d-flex">
                                 <div class="flex-grow-1">{{ $voter->voter_code }}</div>
                                 @can('admin')
-                                    <x-secondary-link class="btn-sm" target="_blank" :href="route('qrcode', ['id' => $voter->voter_code])"><i class="bi bi-qr-code"></i></x-secondary-link>
-                                    &nbsp;
+                                    @can('preparation')
+                                        <x-secondary-link class="btn-sm" target="_blank" :href="route('qrcode', ['id' => $voter->voter_code])"><i class="bi bi-qr-code"></i></x-secondary-link>
+                                        &nbsp;
+                                    @endcan
                                     <x-secondary-link class="btn-sm" :href="route('voters.activate', ['voter' => $voter->id])"><i class="bi bi-check-square"></i></x-secondary-link>
                                 @endcan
                             </div>

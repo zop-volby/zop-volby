@@ -12,6 +12,7 @@ class Ballot extends Model
     protected $fillable = [
         'voting_id',
         'list_id',
+        'is_invalid',
         'votes'
     ];
 

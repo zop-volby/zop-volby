@@ -56,6 +56,8 @@ Route::resource('lists', ElectionListController::class)->middleware('auth');
 Route::get('voters/activate/{voter}', [VoterController::class, 'activate'])->name('voters.activate')->middleware('auth');
 Route::get('voters/load', [VoterController::class, 'get_load'])->name('voters.load')->middleware('auth');
 Route::post('voters/load', [VoterController::class, 'post_load'])->name('voters.load')->middleware('auth');
+Route::get('voters/scan', [VoterController::class, 'get_scan'])->name('voters.scan')->middleware('auth');
+Route::post('voters/scan', [VoterController::class, 'post_scan'])->name('voters.scan')->middleware('auth');
 Route::resource('voters', VoterController::class)->middleware('auth');
 
 Route::get('voting', [VotingController::class, 'index'])->name('voting.index');
