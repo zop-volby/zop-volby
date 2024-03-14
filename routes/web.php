@@ -5,6 +5,7 @@ use App\Http\Controllers\ElectionController;
 use App\Http\Controllers\NomineeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ElectionListController;
+use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\VoterController;
 use App\Http\Controllers\VotingController;
 use App\Models\User;
@@ -20,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('i', function () {
+    phpinfo(); 
+});
 
 Route::get('/', function () {
     return User::count() == 0 ? redirect('register') : view('welcome');
@@ -55,5 +60,7 @@ Route::resource('voters', VoterController::class)->middleware('auth');
 
 Route::get('voting', [VotingController::class, 'index'])->name('voting.index');
 Route::post('voting', [VotingController::class, 'store'])->name('voting.store');
+
+Route::get('qr/{id}', [QrCodeController::class, 'index'])->name('qrcode');
 
 require __DIR__.'/auth.php';

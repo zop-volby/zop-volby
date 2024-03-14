@@ -20,6 +20,7 @@
 | | | Vytvořit/editovat/smazat kandidáta | | :tada: |
 | | | Vytvořit/editovat/smazat kandidátní listinu | | :tada: |
 | | | Přidat/odebrat kandidáta z kandidátní listiny | | :tada: |
+| | Administrátor | Vygenerovat QR kódy pro kódy voliče | | |
 | Elektronické hlasování | Volič | Přihlásit se do volební aplikace | | :tada:|
 | | | Zobrazit kandidátní listiny a kandidáty | | :tada: |
 | | | Hlasovat (vybrat kandidáty a odeslat hlasování) | | :tada: |
