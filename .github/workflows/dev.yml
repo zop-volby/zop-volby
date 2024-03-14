@@ -19,6 +19,7 @@ jobs:
         with:
           # dev: no -- we need dev in order to run migrations
           progress: yes
+          args: --ignore-platform-reqs
 
       - name: Install Client Dependencies
         run: npm install
