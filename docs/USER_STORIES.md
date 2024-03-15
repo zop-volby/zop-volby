@@ -27,6 +27,6 @@
 | | | Zobrazit své uložené hlasování | | :tada: |
 | Zpracování listinného hlasování | Člen volebního týmu | Zadávat kódy voliče z listinného hlasování klávesnící | | :tada: |
 | | | Zadávat kódy voliče z listinného hlasování čtečkou kódů | | :tada: |
-| Po korespondenčním, před prezenčním hlasováním | Administrátor | Získat seznam kódů voličů (a jestli hlasovali) | | |
+| Po korespondenčním, před prezenčním hlasováním | Administrátor | Získat seznam kódů voličů (a jestli hlasovali) | | :tada: |
 | Zpracování výsledků hlasování | Administrátor | Získat souhrnné výsledky elektronického hlasování | | |
 | Po ukončení voleb | Technický správce | Zlikvidovat instanci volební aplikace | | |

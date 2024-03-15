@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use League\Csv\Writer;
 use App\Models\Voter;
 use App\Models\Ballot;
 
@@ -54,6 +55,25 @@ class VoterController extends Controller
         return redirect()
                     ->route('voters.index')
                     ->with('status', 'Voliči byli úspěšně nahráni. Počet nových záznamů: ' . $created . ', počet chyb: ' . $failed);
+    }
+
+    public function list() {
+        Gate::authorize('inperson-voting');
+        $csv = Writer::createFromString();
+        $csv->insertOne(['Kod volice', 'Volil elektronicky', 'Volil listinne', 'Muze volit prezencne']);
+        $voters = Voter::all()->map(function ($voter) {
+            return [
+                $voter->voter_code,
+                $voter->voting_id ? 'Ano' : '',
+                $voter->mail_voting ? 'Ano' : '',
+                !$voter->voting_id && !$voter->mail_voting ? 'Ano' : ''
+            ];
+        });
+        $csv->insertAll($voters->toArray());
+        return response($csv->toString(), 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="voter_codes.csv"',
+        ]);
     }
 
     public function get_scan() {

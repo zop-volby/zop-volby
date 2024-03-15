@@ -15,6 +15,9 @@
                 @can('mail-voting')
                     <x-primary-link :href="route('voters.scan')">{{ __('Listinné hlasování') }}</x-primary-link>
                 @endcan
+                @can('inperson-voting')
+                    <x-primary-link :href="route('voters.list')">{{ __('Seznam platných kódů') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>

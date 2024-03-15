@@ -60,6 +60,7 @@ Route::get('voters/scan', [VoterController::class, 'get_scan'])->name('voters.sc
 Route::post('voters/scan', [VoterController::class, 'post_scan'])->name('voters.scan')->middleware('auth');
 Route::get('voters/qrcode', [VoterController::class, 'get_qrcode'])->name('voters.qrcode')->middleware('auth');
 Route::post('voters/qrcode', [VoterController::class, 'post_qrcode'])->name('voters.qrcode')->middleware('auth');
+Route::get('voters/list', [VoterController::class, 'list'])->name('voters.list')->middleware('auth');
 Route::resource('voters', VoterController::class)->middleware('auth');
 
 Route::get('voting', [VotingController::class, 'index'])->name('voting.index');
