@@ -24,7 +24,7 @@ class QrCodeController extends Controller
             'iss' => 'ZOP Volby',
             'sub' => $id,
             'aud' => 'voting execution',
-            'exp' => time() + 60 * 60 * 12    // 12 hours
+            'exp' => time() + 60 * 60 * 24 * 120    // 120 days
         ];
         $jwt = JWT::encode($payload, $key, 'HS256');
         return QrCode::margin(10)->size(500)->generate($jwt);

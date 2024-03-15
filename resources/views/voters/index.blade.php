@@ -33,7 +33,15 @@
                     <div class="search-item col-4 col-md-3 col-xl-2">
                         <div class="search-item-content {{$voter->is_active ? 'active' : 'inactive' }}">
                             <div class="d-flex">
-                                <div class="flex-grow-1">{{ $voter->voter_code }}</div>
+                                <div class="flex-grow-1">
+                                    {{ $voter->voter_code }}
+                                    @if ($voter->voting_id) 
+                                        <i class="{{ $voter->mail_voting ? 'text-danger' : 'text-success' }} bi bi-pc-display"></i>
+                                    @endif
+                                    @if ($voter->mail_voting)
+                                        <i class="{{ $voter->voting_id ? 'text-danger' : 'text-info' }} bi bi-envelope"></i>
+                                    @endif
+                                </div>
                                 @can('admin')
                                     @can('preparation')
                                         <x-secondary-link class="btn-sm" target="_blank" :href="route('qrcode', ['id' => $voter->voter_code])"><i class="bi bi-qr-code"></i></x-secondary-link>

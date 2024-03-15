@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use App\Models\Voter;
 use App\Models\Ballot;
 
@@ -65,7 +67,35 @@ class VoterController extends Controller
             'voter_code' => 'required'
         ]);
 
-        $voter = Voter::where('voter_code', $request->voter_code)->first();
+        return $this->process_voter_code($request->voter_code);
+    }
+
+    public function get_qrcode() {
+        Gate::authorize('mail-voting');
+        return view('voters.qrcode');
+    }
+
+    public function post_qrcode(Request $request) {
+        Gate::authorize('mail-voting');
+        $request->validate([
+            'voter_qrcode' => 'required'
+        ]);
+
+        $key = config('voting.jwt_key');
+        try {
+            $decoded = JWT::decode($request->voter_qrcode, new Key($key, 'HS256'));
+        }
+        catch (\Exception $e) {
+            return redirect()
+                    ->route('voting.index')
+                    ->with('status', 'Platnost QR kódu vypršela');
+        }
+
+        return $this->process_voter_code($decoded->sub);
+    }
+
+    private function process_voter_code($voter_code) {
+        $voter = Voter::where('voter_code', $voter_code)->first();
         if (!$voter) {
             return redirect()
                         ->route('voters.scan')

@@ -45,7 +45,7 @@
         </div>
         <div class="col-12 col-sm-6 border border-secondary-subtle p-3">
             <div class="d-grid mt-2">
-                <x-primary-link class="btn-lg">{{ _('Naskenovat QR kod') }}</x-primary-button>
+                <x-primary-link class="btn-lg" :href="route('voters.qrcode')">{{ _('Naskenovat QR kod') }}</x-primary-button>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+import { BindQrCodeScanner } from "./qrcode";
 import { BindSearchBar } from "./searchbar";
 import { BindVotingView } from "./voting";
 
@@ -6,5 +7,9 @@ export function Main() {
 
     if (document.getElementById('secret_token')) {
         BindVotingView();
+    }
+
+    if (document.getElementById('qrcode_scanner')) {
+        BindQrCodeScanner();
     }
 }
