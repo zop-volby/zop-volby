@@ -1,6 +1,6 @@
 <nav>
     <!-- Primary Navigation Menu -->
-    <div class="navbar navbar-expand-sm bg-body-tertiary ps-2">
+    <div class="navbar navbar-expand-lg bg-body-tertiary ps-2">
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="{{ route('dashboard') }}">

@@ -23,7 +23,7 @@
 
         <div>
             <x-input-label for="phase" :value="__('Aktuální fáze')" />
-            <div class="form-control btn-group">
+            <div class="form-control btn-group flex-wrap">
                 @foreach($model->get_phases() as $phase)
                     <input type="radio" class="btn-check" name="phase" id="{{$phase}}" autocomplete="off" value="{{$phase}}" @if($model->phase == $phase) checked @endif>
                     <label class="btn btn-outline-primary" for="{{$phase}}">{{__('election.phase.' . $phase)}}</label>

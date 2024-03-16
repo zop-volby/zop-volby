@@ -30,7 +30,7 @@
 
 <div>
     <x-input-label for="electionLists" :value="__('Kandiduje za listiny')" />
-    <div class="form-control btn-group">
+    <div class="form-control btn-group flex-wrap">
         @foreach($model->getAllElectionLists() as $list)
             <input type="checkbox" class="btn-check" name="electionLists[]" id="{{$list->id}}" autocomplete="off" value="{{$list->id}}" @if($model->electionLists->contains($list)) checked @endif>
             <label class="btn btn-outline-primary" for="{{$list->id}}">{{$list->name}}</label>

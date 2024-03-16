@@ -38,7 +38,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->max_votes }}</td>
                                     <td>{{ $item->nominees->count() }}</td>
-                                    <td class="text-end">
+                                    <td class="text-end text-nowrap">
                                         @can('preparation')
                                             <x-secondary-link :href="route('lists.edit', ['list'=> $item->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
                                         @endcan
