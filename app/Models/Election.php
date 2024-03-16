@@ -43,4 +43,34 @@ class Election extends Model
             ElectionPhases::FINISHED,
         ];
     }
+
+    private $data;
+
+    public function get_chart() {
+        if (!$this->data) {
+            $voters = Voter::all();
+            $data = [0, 0, 0, 0, 0];
+            foreach ($voters as $voter) {
+                if ($voter->voting_id) {
+                    if ($voter->mail_voting) {
+                        $data[4]++;  // both voting - invalid
+                    }
+                    else {
+                        $data[2]++;  // digital voting
+                    }
+                }
+                else {
+                    if ($voter->mail_voting) {
+                        $data[3]++;  // mail voting
+                    }
+                    else {
+                        $data[1]++;  // not voted yet
+                    }
+                }
+            }
+            $data[0] = max($data[1], $data[2], $data[3], $data[4]);
+        }
+
+        return $data;
+    }
 }

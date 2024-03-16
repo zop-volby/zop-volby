@@ -8,6 +8,7 @@ use App\Http\Controllers\ElectionListController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\VoterController;
 use App\Http\Controllers\VotingController;
+use App\Models\Election;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,8 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $model = Election::find(1);
+    return view('dashboard', compact('model'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
