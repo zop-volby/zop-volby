@@ -28,10 +28,12 @@
             <div class="card">
                 <h3 class="card-header">{{ __('Průběh voleb') }}</h3>
                 <div class="card-body">
-                    <div class="text-bg-secondary p-2" style="width:{{ 100*$model->get_chart()[1]/$model->get_chart()[0] }}%">{{ $model->get_chart()[1] }}</div>
-                    <div class="text-bg-success p-2" style="width:{{ 100*$model->get_chart()[2]/$model->get_chart()[0] }}%">{{ $model->get_chart()[2] }}</div>
-                    <div class="text-bg-info p-2" style="width:{{ 100*$model->get_chart()[3]/$model->get_chart()[0] }}%">{{ $model->get_chart()[3] }}</div>
-                    <div class="text-bg-danger p-2" style="width:{{ 100*$model->get_chart()[4]/$model->get_chart()[0] }}%">{{ $model->get_chart()[4] }}</div>
+                    <table width="100%">
+                        <tr><td class="pe-2" width="1px">{{ $model->get_chart()[1] }}</td><td><div class="text-bg-secondary p-2" style="width:{{ 100*$model->get_chart()[1]/$model->get_chart()[0] }}%"></div></td></tr>
+                        <tr><td>{{ $model->get_chart()[2] }}</td><td><div class="text-bg-success p-2" style="width:{{ 100*$model->get_chart()[2]/$model->get_chart()[0] }}%"></div></td></tr>
+                        <tr><td>{{ $model->get_chart()[3] }}</td><td><div class="text-bg-info p-2" style="width:{{ 100*$model->get_chart()[3]/$model->get_chart()[0] }}%"></div></td></tr>
+                        <tr><td>{{ $model->get_chart()[4] }}</td><td><div class="text-bg-danger p-2" style="width:{{ 100*$model->get_chart()[4]/$model->get_chart()[0] }}%"></div></td></tr>
+                    </table>
                 </div> 
                 <div class="card-footer">
                     <div class="d-flex gap-1">
