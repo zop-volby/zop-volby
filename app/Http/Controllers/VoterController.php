@@ -133,9 +133,11 @@ class VoterController extends Controller
             $voter->save();
 
             if ($voter->voting_id) {
-                $ballot = Ballot::where('voting_id', $voter->voting_id)->first();
-                $ballot->is_invalid = true;
-                $ballot->save();
+                $ballots = Ballot::where('voting_id', $voter->voting_id)->get();
+                foreach ($ballots as $ballot) {
+                    $ballot->is_invalid = true;
+                    $ballot->save();
+                }
             }
         });
 
@@ -157,5 +159,12 @@ class VoterController extends Controller
         $voter->is_active = $voter->is_active ? false : true;
         $voter->save();
         return redirect()->route('voters.index');
+    }
+
+    public function results() {
+        Gate::authorize('finished');
+        $data = Ballot::where('is_invalid', false)->get();
+        $model = $data->count();
+        return view('voters.results', compact('model'));
     }
 }

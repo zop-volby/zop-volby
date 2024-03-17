@@ -43,7 +43,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/election', [ElectionController::class, 'edit'])->name('election.edit');
     Route::put('/election', [ElectionController::class, 'update'])->name('election.update');
-
 });
 
 Route::post('users/{user}/activate', [UserController::class, 'activate'])->name('users.activate')->middleware('auth');
@@ -63,6 +62,7 @@ Route::post('voters/scan', [VoterController::class, 'post_scan'])->name('voters.
 Route::get('voters/qrcode', [VoterController::class, 'get_qrcode'])->name('voters.qrcode')->middleware('auth');
 Route::post('voters/qrcode', [VoterController::class, 'post_qrcode'])->name('voters.qrcode')->middleware('auth');
 Route::get('voters/list', [VoterController::class, 'list'])->name('voters.list')->middleware('auth');
+Route::get('voters/results', [VoterController::class, 'results'])->name('voters.results')->middleware('auth');
 Route::resource('voters', VoterController::class)->middleware('auth');
 
 Route::get('voting', [VotingController::class, 'index'])->name('voting.index');

@@ -25,9 +25,15 @@
                     <x-nav-link :href="route('lists.index')" :active="request()->routeIs('lists.index')">
                         {{ __('Kandidátní listiny') }}
                     </x-nav-link>
+                    @can('finished')
+                    <x-nav-link :href="route('voters.results')" :active="request()->routeIs('voters.results')">
+                        {{ __('Výsledky') }}
+                    </x-nav-link>
+                    @else
                     <x-nav-link :href="route('voters.index')" :active="request()->routeIs('voters.index')">
                         {{ __('Voliči') }}
                     </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('Uživatelé') }}
                     </x-nav-link>
