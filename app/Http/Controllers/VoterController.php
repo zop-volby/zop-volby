@@ -10,6 +10,9 @@ use Firebase\JWT\Key;
 use League\Csv\Writer;
 use App\Models\Voter;
 use App\Models\Ballot;
+use App\Models\ElectionList;
+use App\Models\Nominee;
+use App\Models\VotingResult;
 
 class VoterController extends Controller
 {
@@ -163,8 +166,26 @@ class VoterController extends Controller
 
     public function results() {
         Gate::authorize('finished');
-        $data = Ballot::where('is_invalid', false)->get();
-        $model = $data->count();
+        $lists = ElectionList::all();
+        $data = [];
+        foreach ($lists as $list) {
+            $result = [];
+            $nominees = $list->nominees()->get();
+            foreach ($nominees as $nominee) {
+                $result[$nominee->id] = 0;
+            }
+            $data[$list->id] = $result;
+        }
+        
+        $ballots = Ballot::where('is_invalid', false)->get();
+        foreach ($ballots as $ballot) {
+            $votes = explode(',', $ballot->votes);
+            foreach ($votes as $vote) {
+                $data[$ballot->list_id][$vote]++;
+            }
+        }
+
+        $model = new VotingResult($data);
         return view('voters.results', compact('model'));
     }
 }
