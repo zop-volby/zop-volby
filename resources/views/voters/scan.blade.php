@@ -5,7 +5,7 @@
         </h2>
         <div class="alert alert-light">
             <i class="bi bi-info-circle"></i>
-            Zadávejte kódy voličů, kterří hlasovali listinným hlasováním.
+            Zadávejte kódy voličů, kteří hlasovali listinným hlasováním.
             Buď opište kód přímo z obálky, nebo naskenujte QR kód.
         </div>
     </x-slot>

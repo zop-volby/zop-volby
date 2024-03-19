@@ -144,6 +144,11 @@ class VoterController extends Controller
             }
         });
 
+        if ($voter->voting_id) {
+            $model = $voter;
+            return view('voters.double', compact('model'));
+        }
+
         return redirect()
                     ->route('voters.scan')
                     ->with('status', 'Volič byl úspěšně načten pro listinné hlasování.');
