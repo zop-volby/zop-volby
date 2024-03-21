@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ElectionList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Voter;
 use App\Models\Voting;
 use App\Models\Ballot;
@@ -15,11 +16,13 @@ class VotingController extends Controller
 {
     public function index()
     {
+        Gate::authorize('digital-voting');
         $model = new Voting();
         return view('voting.index', compact('model'));
     }
 
     public function store(Request $request) {
+        Gate::authorize('digital-voting');
         if ($request->voter_code == null) {
             return redirect()
                     ->route('voting.index')
