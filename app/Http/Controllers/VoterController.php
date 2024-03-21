@@ -170,7 +170,7 @@ class VoterController extends Controller
     }
 
     public function results() {
-        Gate::authorize('finished');
+        Gate::authorize('result-processing');
         $lists = ElectionList::all();
         $data = [];
         foreach ($lists as $list) {
