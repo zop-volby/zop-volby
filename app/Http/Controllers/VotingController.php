@@ -50,6 +50,9 @@ class VotingController extends Controller
         }
         else if ($request->secret_value != null) {
             // secret value was provided, we can let the user in
+            $request->validate([
+                'secret_value' => 'numeric'
+            ]);
             $secret_value = VoterController::normalize_second_factor($request->secret_value);
             if (password_verify($secret_value, $voter->secret_hash)) {
                 if ($voter->voting_id != null) {
