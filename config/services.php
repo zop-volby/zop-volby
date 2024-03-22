@@ -17,13 +17,13 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => url('auth/google/callback'),
+        'redirect' => '/auth/google/callback',
     ],
 
     'azure' => [    
         'client_id' => env('AZURE_CLIENT_ID'),
         'client_secret' => env('AZURE_CLIENT_SECRET'),
-        'redirect' => url('auth/azure/callback'),
+        'redirect' => '/auth/azure/callback',
     ],
 
     'mailgun' => [
