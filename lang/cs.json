@@ -4,5 +4,10 @@
     "election.phase.mail-voting": "Listinné hlasování",
     "election.phase.inperson-voting": "Prezenční hlasování",
     "election.phase.result-processing": "Zpracování výsledků",
-    "election.phase.finished": "Volby ukončeny"
+    "election.phase.finished": "Volby ukončeny",
+
+    "widget.results.not-voted-yet": "Nehlasovali",
+    "widget.results.digital-voting": "Elektronicky",
+    "widget.results.mail-voting": "Listinně",
+    "widget.results.invalid-voting": "Neplatné"
 }
