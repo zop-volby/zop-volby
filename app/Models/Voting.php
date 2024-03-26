@@ -30,10 +30,20 @@ class Voting {
     }
 
     public function votes_count($list_id) {
+        if (!isset($this->votes[$list_id])) {
+            // user didn't send any votes for this list
+            return 0;  
+        }
+
         return count(explode(',', $this->votes[$list_id]));
     }
 
     public function is_checked($list, $nominee) {
+        if (!isset($this->votes[$list])) {
+            // user didn't send any votes for this list
+            return false;
+        }
+
         return str_contains($this->votes[$list], $nominee);
     }
 }
