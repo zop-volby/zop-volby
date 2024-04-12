@@ -23,7 +23,7 @@
         <div class="navbar navbar-expand-sm bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
+                    <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ŽOP Volby" class="d-inline-block align-text-top">
                     {{ Election::find(1)->name }}
                 </a>
             </div>

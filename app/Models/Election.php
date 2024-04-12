@@ -55,6 +55,7 @@ class Election extends Model
     protected $fillable = [
         'name',
         'start_at',
+        'end_at',
         'phase',
     ];
 
@@ -63,8 +64,17 @@ class Election extends Model
         return $this->name . ' | ' . $phase_label;
     }
 
-    public function get_datetime() {
-        return date('d. m. Y H:i', strtotime($this->start_at));
+    public function get_startdate() {
+        return date('d. m. Y', strtotime($this->start_at));
+    }
+    public function get_starttime() {
+        return date('H:i', strtotime($this->start_at));
+    }
+    public function get_enddate() {
+        return date('d. m. Y', strtotime($this->end_at));
+    }
+    public function get_endtime() {
+        return date('H:i', strtotime($this->end_at));
     }
 
     public function get_phases() {

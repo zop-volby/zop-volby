@@ -16,6 +16,11 @@
     </div>
 
     <div>
+        <x-input-label for="end_at" :value="__('Konec')" />
+        <x-text-input id="end_at" name="end_at" type="datetime-local" disabled value="{{$model->end_at}}"/>
+    </div>
+
+    <div>
         <x-input-label for="phase" :value="__('Aktuální fáze')" />
         <x-text-input id="phase" name="phase" type="text" disabled value="{{__('election.phase.' . $model->phase)}}"/>
     </div>

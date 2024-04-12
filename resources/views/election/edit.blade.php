@@ -22,6 +22,12 @@
         </div>
 
         <div>
+            <x-input-label for="end_at" :value="__('Konec')" />
+            <x-text-input id="end_at" name="end_at" type="datetime-local" step="1" required autofocus autocomplete="end_at" value="{{$model->end_at}}"/>
+            <x-input-error class="mt-2" :messages="$errors->get('end_at')" />
+        </div>
+
+        <div>
             <x-input-label for="phase" :value="__('Aktuální fáze')" />
             <div class="form-control btn-group flex-wrap">
                 @foreach($model->get_phases() as $phase)

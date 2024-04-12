@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="{{ route('dashboard') }}">
-                <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
+                <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ŽOP Volby" class="d-inline-block align-text-top">
                 {{ Election::find(1)->get_header() }}
             </a>
 

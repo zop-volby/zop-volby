@@ -24,11 +24,13 @@ class ElectionController extends Controller
         $request->validate([
             'name' => 'required',
             'start_at' => 'required|date',
+            'end_at' => 'required|date', 
             'phase' => 'required',
         ]);
         $model = Election::find(1);
         $model->name = $request->input('name');
         $model->start_at = $request->input('start_at');
+        $model->end_at = $request->input('end_at');
         $model->phase = $request->input('phase');
         $model->save();
         return redirect()->route('dashboard');

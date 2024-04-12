@@ -3,7 +3,8 @@
     <div class="card-body">
         <h5 class="card-title">{{ $model->name }}</h5>
         <p class="card-text">{{ __('election.phase.' . $model->phase) }}</p>
-        <p class="card-text">{{ __('Začátek hlasování') }}: {{ $model->get_datetime() }}</p>
+        <p class="card-text">{{ __('Začátek hlasování') }}: {{ $model->get_startdate() }} {{ $model->get_starttime() }}</p>
+        <p class="card-text">{{ __('Konec hlasování') }}: {{ $model->get_enddate() }} {{ $model->get_endtime() }}</p>
     </div>
     <div class="card-footer text-end">
         <x-secondary-link :href="route('election.edit')"><i class="bi bi-pencil-fill"></i></x-secondary-link>

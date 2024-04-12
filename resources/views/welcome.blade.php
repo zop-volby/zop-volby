@@ -20,7 +20,7 @@
             <div class="navbar navbar-expand-sm bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ZuSa" class="d-inline-block align-text-top">
+                        <img src="{{ asset('img/icon.jpg') }}" width="20" height="24" alt="ŽOP Volby" class="d-inline-block align-text-top">
                         {{ Election::find(1)->name }}
                     </a>
                 </div>
@@ -48,18 +48,31 @@
                 @can('preparation')
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p>Nebližší volby budou: <b>{{ Election::find(1)->get_datetime() }}</b></p>
+                            <p>Nebližší volby budou v následujícím termínu:
+                            </br>
+                            od <b>{{ Election::find(1)->get_startdate() }} {{ Election::find(1)->get_starttime() }}</b>
+                            </br>
+                            do <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b>
+                            </p>
                         </div>
                     </div>
                 @endcan
                 @can('digital-voting')
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p>Digitální hlasování je otevřeno. Nejprve se přihlaste.</p>
+                            <p>Digitální hlasování je otevřeno do <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b>.</p>
+                            <p>Nejprve se přihlaste.</p>
                             <p><x-primary-link href="{{ route('voting.index') }}">Přihlásit jako volič</x-primary-link></p>
                         </div>
                     </div>
                 @endcan
+                @canany(['mail-voting', 'inperson-voting', 'result-processing', 'finished'])
+                    <div class="row mt-4">
+                        <div class="col text-center">
+                            <p>Digitální hlasování skončilo <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b>.</p>
+                        </div>
+                    </div>
+                @endcanany
                 <div class="row mt-4">
                     <div class="col text-end">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
