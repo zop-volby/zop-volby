@@ -26,6 +26,7 @@
                             <tr>
                                 <th>{{ __('ID') }}</th>
                                 <th>{{ __('Název') }}</th>
+                                <th>{{ __('Popiska') }}</th>
                                 <th>{{ __('Počet hlasů') }}</th>
                                 <th>{{ __('Počet kandidátů') }}</th>
                                 <th></th>
@@ -36,6 +37,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->description }}</td>
                                     <td>{{ $item->max_votes }}</td>
                                     <td>{{ $item->nominees->count() }}</td>
                                     <td class="text-end text-nowrap">

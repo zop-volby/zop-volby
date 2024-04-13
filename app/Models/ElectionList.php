@@ -11,6 +11,7 @@ class ElectionList extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'max_votes',
     ];
 

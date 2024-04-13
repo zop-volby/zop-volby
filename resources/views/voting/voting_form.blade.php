@@ -30,6 +30,7 @@
             <input type="hidden" name="list_{{ $list->id }}" id="list_{{ $list->id }}" value="">
             <div id="collapse{{ $list->id }}" class="accordion-collapse collapse show" data-bs-parent="#electionList">
                 <div class="accordion-body">
+                    <p>{{ $list->description }}</p>
                     <ul class="list-group">
                     @foreach ($model->getNominees($list->id) as $nominee)
                         <li class="list-group-item text-start voting-nominee" data-nominee="{{ $nominee->id }}">

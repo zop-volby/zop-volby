@@ -1,3 +1,5 @@
+import Toastify from "toastify-js";
+
 export function BindVotingView() {
     for (let list of document.getElementsByClassName("voting-list")) {
         const listId = (list as HTMLElement).dataset.list;
@@ -15,10 +17,18 @@ export function BindVotingView() {
                 const index = values.indexOf(nomineeId);
                 const check = document.getElementById(`check_${listId}_${nomineeId}`) as HTMLElement;
                 if (index === -1) {
-                    if (values.length >= maxVotes) return;
-                    values.push(nomineeId);
-                    check.classList.remove("bi-square");
-                    check.classList.add("bi-check-square");
+                    if (values.length >= maxVotes) {
+                        Toastify({
+                            text: 'Hlasování je omezeno na maximální počet ' + maxVotes + ' hlasů.',
+                            gravity: "bottom",
+                            position: "center",
+                        }).showToast();
+                    }
+                    else {
+                        values.push(nomineeId);
+                        check.classList.remove("bi-square");
+                        check.classList.add("bi-check-square");
+                    }
                 } else {
                     values.splice(index, 1);
                     check.classList.remove("bi-check-square");
@@ -27,11 +37,14 @@ export function BindVotingView() {
                 listField.value = values.join(",");
                 votesSpan.innerText = values.length.toString();
 
-                if (values.length < maxVotes) {
+                votesBadge.classList.remove("bg-success", "bg-primary", "bg-warning");
+                if (values.length === 0) {
                     votesBadge.classList.add("bg-primary");
-                    votesBadge.classList.remove("bg-success");
-                } else {
-                    votesBadge.classList.remove("bg-primary");
+                } 
+                else if (values.length < maxVotes) {
+                    votesBadge.classList.add("bg-warning");
+                } 
+                else {
                     votesBadge.classList.add("bg-success");
                 }
             });
