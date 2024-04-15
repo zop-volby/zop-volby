@@ -15,6 +15,11 @@
     </div>
     <div class="row mt-4">
         <div class="col text-center">
+            <p><img class="voted" src="{{ asset('img/voted.png') }}"></p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col text-center">
             <x-primary-link href="{{ route('welcome') }}">Zpět na přihlášení</x-primary-link>
         </div>
     </div>
