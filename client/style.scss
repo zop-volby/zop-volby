@@ -48,6 +48,12 @@ form {
     }
 }
 
-.voting-list {
-    margin-bottom: 50px;
+.voting-list, .results-list {
+    .card-header {
+        background-color: #eee;
+    }
+    .nominee-name {
+        font-weight: 600;
+        font-size: 140%;
+    }
 }

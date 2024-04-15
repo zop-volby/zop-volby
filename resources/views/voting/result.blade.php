@@ -4,34 +4,34 @@
             <h1>{{ Election::find(1)->name }}</h1>
         </div>
     </div>
-    <div class="text-center">
-    <div class="row">
+    <div class="row mt-4">
         <div class="col text-center">
             <h2>Vaše hlasování</h2>
         </div>
     </div>
+    <div class="row mt-4">
+        <div class="col text-center">
+            <p>Hlasování proběhlo {{$model->voting_time}}</p>
+        </div>
+    </div>
 
-    <p>Hlasování proběhlo {{$model->voting_time}}</p>
-
-    <div class="accordion mt-4" id="electionLists">
+    <div class="row mt-4"><div class="col">
     @foreach ($model->getLists() as $list)
-    <div class="accordion-item voting-list" data-list="{{ $list->id }}" data-maxvotes="{{ $list->max_votes }}">
-        <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $list->id }}" aria-expanded="true" aria-controls="collapse{{ $list->id }}">
+        <div class="card mb-4 results-list" data-list="{{ $list->id }}" data-maxvotes="{{ $list->max_votes }}">
+            <h2 class="card-header sticky-top">
                 {{ $list->name }} 
                 <span class="ms-2 badge bg-primary" id="badge_{{ $list->id }}">{{ $model->votes_count($list->id) }} / {{ $list->max_votes }}</span>
-            </button>
-        </h2>
-        <div id="collapse{{ $list->id }}" class="accordion-collapse collapse show" data-bs-parent="#electionList">
-            <div class="accordion-body">
+            </h2>
+            <div class="card-body">
                 <p>{{ $list->description }}</p>
                 <ul class="list-group">
                 @foreach ($model->getNominees($list->id) as $nominee)
-                    <li class="list-group-item text-start voting-nominee" data-nominee="{{ $nominee->id }}">
+                    <li class="list-group-item text-start voting-nominee {{($model->is_checked($list->id, $nominee->id) ? "bg-success-subtle" : "")}}" data-nominee="{{ $nominee->id }}">
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <div>
-                                    {{ $nominee->first_name }} {{ $nominee->last_name }} *{{ $nominee->year_of_birth }}
+                                    <span class="nominee-name">{{ $nominee->first_name }} {{ $nominee->last_name }}</span>
+                                    *{{ $nominee->year_of_birth }}
                                 </div>
                                 <div>
                                     {{ $nominee->biography }}
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="voting-button">
-                                <i id="check_{{ $list->id }}_{{ $nominee->id }}" class="bi fs-2 {{($model->is_checked($list->id, $nominee->id) ? "bi-check-square" : "bi-square")}}"></i>                                    
+                                <i id="check_{{ $list->id }}_{{ $nominee->id }}" class="fs-1 bi {{($model->is_checked($list->id, $nominee->id) ? "bi-check" : "")}}"></i>                                    
                             </div>
                         </div>
                     </li>
@@ -47,6 +47,7 @@
                 </ul>
             </div>
         </div>
-    </div>
     @endforeach
-</div></x-guest-layout>
+    </div></div>
+
+</x-guest-layout>
