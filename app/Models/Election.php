@@ -54,6 +54,7 @@ class Election extends Model
 
     protected $fillable = [
         'name',
+        'hyperlink',
         'start_at',
         'end_at',
         'phase',

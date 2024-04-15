@@ -11,6 +11,12 @@
     </div>
 
     <div>
+        <x-input-label for="hyperlink" :value="__('Odkaz')" />
+        <x-text-input id="hyperlink" name="hyperlink" type="text" disabled value="{{$model->hyperlink}}"/>
+        <a target="_blank" href="{{ $item->hyperlink }}"><i class="bi bi-box-arrow-up-right"></i></a>
+    </div>
+
+    <div>
         <x-input-label for="start_at" :value="__('Začátek')" />
         <x-text-input id="start_at" name="start_at" type="datetime-local" disabled value="{{$model->start_at}}"/>
     </div>

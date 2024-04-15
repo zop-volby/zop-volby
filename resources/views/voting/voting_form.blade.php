@@ -15,6 +15,9 @@
                 Můžete vybírat až do maximálního počtu kandátů, jak je uvedeno v záhlaví lístku.
                 Na závěr svoji volbu potvrďte tlačítkem "Odeslat".
             </p>
+            <p>
+                <a target="_blank" href="{{ Election::find(1)->hyperlink }}">Odkaz na volební brožuru <i class="bi bi-box-arrow-up-right"></i></a>
+            </p>
         </div>
     </div>
 

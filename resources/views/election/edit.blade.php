@@ -16,6 +16,12 @@
         </div>
 
         <div>
+            <x-input-label for="hyperlink" :value="__('Odkaz')" />
+            <x-text-input id="hyperlink" name="hyperlink" type="text" required autofocus autocomplete="hyperlink" value="{{$model->hyperlink}}"/>
+            <x-input-error class="mt-2" :messages="$errors->get('hyperlink')" />
+        </div>
+
+        <div>
             <x-input-label for="start_at" :value="__('Začátek')" />
             <x-text-input id="start_at" name="start_at" type="datetime-local" step="1" required autofocus autocomplete="start_at" value="{{$model->start_at}}"/>
             <x-input-error class="mt-2" :messages="$errors->get('start_at')" />

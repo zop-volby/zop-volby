@@ -1,7 +1,10 @@
 <div class="card">
     <h3 class="card-header">{{ __('Aktuální volby') }}</h3>
     <div class="card-body">
-        <h5 class="card-title">{{ $model->name }}</h5>
+        <h5 class="card-title">
+            {{ $model->name }}
+            <a target="_blank" href="{{ $model->hyperlink }}"><i class="bi bi-box-arrow-up-right"></i></a>
+        </h5>
         <p class="card-text">{{ __('election.phase.' . $model->phase) }}</p>
         <p class="card-text">{{ __('Začátek hlasování') }}: {{ $model->get_startdate() }} {{ $model->get_starttime() }}</p>
         <p class="card-text">{{ __('Konec hlasování') }}: {{ $model->get_enddate() }} {{ $model->get_endtime() }}</p>
