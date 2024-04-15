@@ -3,6 +3,8 @@
 namespace App\Models;
 
 class VotingResultNominee {
+    public $name;
+    public $votes;
     public function __construct($index, $data) {
         $nominee = Nominee::find($index);
         $this->name = $nominee->first_name . " " . $nominee->last_name . " *" . $nominee->year_of_birth;

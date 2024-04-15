@@ -172,12 +172,18 @@ class VoterController extends Controller
     public function results() {
         Gate::authorize('result-processing');
         $lists = ElectionList::all();
+        $data = $this->calculateVotingResults($lists);
+        $model = new VotingResult($data);
+        return view('voters.results', compact('model'));
+    }
+
+    private function calculateVotingResults($lists) {
         $data = [];
         foreach ($lists as $list) {
             $result = [];
-            $nominees = $list->nominees()->get();
+            $nominees = $list->getAssignedNominees();
             foreach ($nominees as $nominee) {
-                $result[$nominee->id] = 0;
+            $result[$nominee->id] = 0;
             }
             $data[$list->id] = $result;
         }
@@ -186,11 +192,30 @@ class VoterController extends Controller
         foreach ($ballots as $ballot) {
             $votes = explode(',', $ballot->votes);
             foreach ($votes as $vote) {
-                $data[$ballot->list_id][$vote]++;
+            $data[$ballot->list_id][$vote]++;
             }
         }
 
-        $model = new VotingResult($data);
-        return view('voters.results', compact('model'));
+        return $data;
+    }
+
+    public function download() {
+        Gate::authorize('result-processing');
+        $csv = Writer::createFromString();
+        $csv->insertOne(['Prijmeni', 'Jmeno', 'Rok narozeni', 'Pocet hlasu']);
+        $lists = ElectionList::all();
+        $data = $this->calculateVotingResults($lists);
+        foreach ($data as $list_id => $nominees) {
+            $list = ElectionList::find($list_id);
+            $csv->insertOne([$list->name, "", "", ""]);
+            foreach ($nominees as $nominee_id => $votes) {
+                $nominee = Nominee::find($nominee_id);
+                $csv->insertOne([$nominee->last_name, $nominee->first_name, $nominee->year_of_birth, $votes]);
+            }
+        }
+        return response($csv->toString(), 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="voting_results.csv"',
+        ]);
     }
 }
