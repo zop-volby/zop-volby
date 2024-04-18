@@ -14,8 +14,8 @@ return new class extends Migration
         $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
 
         Schema::table('nominees', function (Blueprint $table) use ($driver) {
-            $table->string('biography')->nullable()->change();
-            $table->string('link_to_page')->nullable()->change();
+            $table->text('biography')->nullable()->change();
+            $table->text('link_to_page')->nullable()->change();
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('nominees', function (Blueprint $table) {
-            $table->string('biography')->nullable(false)->change();
-            $table->string('link_to_page')->nullable(false)->change();
+            $table->text('biography')->nullable(false)->change();
+            $table->text('link_to_page')->nullable(false)->change();
         });
     }
 };
