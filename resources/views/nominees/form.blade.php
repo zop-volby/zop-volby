@@ -18,13 +18,13 @@
 
 <div>
     <x-input-label for="biography" :value="__('Krátká biografie')" />
-    <x-text-input id="biography" name="biography" type="text" required autofocus autocomplete="biography" value="{{$model->biography}}"/>
+    <x-text-input id="biography" name="biography" type="text" autofocus autocomplete="biography" value="{{$model->biography}}"/>
     <x-input-error class="mt-2" :messages="$errors->get('biography')" />
 </div>
 
 <div>
     <x-input-label for="link_to_page" :value="__('Odkaz na stránku')" />
-    <x-text-input id="link_to_page" name="link_to_page" type="text" required autofocus autocomplete="link_to_page" value="{{$model->link_to_page}}"/>
+    <x-text-input id="link_to_page" name="link_to_page" type="text" autofocus autocomplete="link_to_page" value="{{$model->link_to_page}}"/>
     <x-input-error class="mt-2" :messages="$errors->get('link_to_page')" />
 </div>
 

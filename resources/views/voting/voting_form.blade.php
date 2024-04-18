@@ -42,7 +42,9 @@
                                 </div>
                                 <div>
                                     {{ $nominee->biography }}
-                                    <a target="_blank" href="{{ $nominee->link_to_page }}"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    @if ($nominee->link_to_page)
+                                        <a target="_blank" href="{{ $nominee->link_to_page }}"><i class="bi bi-box-arrow-up-right"></i></a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="voting-button">
