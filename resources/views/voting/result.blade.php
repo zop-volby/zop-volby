@@ -17,7 +17,7 @@
                 Zároveň už nebudete připuštěni k prezenčnímu hlasování.
             </p>
             <p>Váš kód voliče: <b>{{$model->voter_code}}</b></p>
-            <p>Hlasovali jste <b>{{$model->voting_time}}</b></p>
+            <p>Hlasovali jste <b>{{$model->voting_time}}</b> (CET)</p>
         </div>
     </div>
 

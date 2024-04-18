@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="engine" content="Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})">
 
         <title>ŽOP Volby</title>
         @include('layouts.telemetry')
@@ -49,9 +50,9 @@
                         <div class="col text-center">
                             <p>Nebližší volby budou v následujícím termínu:
                             </br>
-                            od <b>{{ Election::find(1)->get_startdate() }} {{ Election::find(1)->get_starttime() }}</b>
+                            od <b>{{ Election::find(1)->get_startdate() }} {{ Election::find(1)->get_starttime() }}</b> (CET)
                             </br>
-                            do <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b>
+                            do <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b> (CET)
                             </p>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                 @can('digital-voting')
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p>Digitální hlasování je otevřeno do <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b>.</p>
+                            <p>Digitální hlasování je otevřeno do <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b> (CET).</p>
                             <p>Nejprve se přihlaste.</p>
                             <p><x-primary-link href="{{ route('voting.index') }}">Přihlásit jako volič</x-primary-link></p>
                         </div>
@@ -68,16 +69,12 @@
                 @canany(['mail-voting', 'inperson-voting', 'result-processing', 'finished'])
                     <div class="row mt-4">
                         <div class="col text-center">
-                            <p>Digitální hlasování skončilo <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b>.</p>
+                            <p>Digitální hlasování skončilo <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b> (CET).</p>
                         </div>
                     </div>
                 @endcanany
-                <div class="row mt-4">
-                    <div class="col text-end">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </div>
-                </div>
             </div>
+            @include('layouts.footer')
         </div>
     </body>
 </html>

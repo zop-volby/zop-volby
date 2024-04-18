@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="engine" content="Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})">
 
         <title>ŽOP Volby</title>
         @include('layouts.telemetry')
@@ -28,9 +29,10 @@
             </div>
         </div>
         <div>
-            <div class="container mt-4">
+            <div class="container mt-4 mb-4">
                 {{ $slot }}
             </div>
         </div>
+        @include('layouts.footer')
     </body>
 </html>
