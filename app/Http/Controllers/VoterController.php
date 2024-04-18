@@ -63,6 +63,7 @@ class VoterController extends Controller
     public function list() {
         Gate::authorize('inperson-voting');
         $csv = Writer::createFromString();
+        $csv->setOutputBOM(Writer::BOM_UTF8);
         $csv->insertOne(['Kod volice', 'Volil elektronicky', 'Volil listinne', 'Muze volit prezencne']);
         $voters = Voter::all()->map(function ($voter) {
             return [
@@ -202,6 +203,7 @@ class VoterController extends Controller
     public function download() {
         Gate::authorize('result-processing');
         $csv = Writer::createFromString();
+        $csv->setOutputBOM(Writer::BOM_UTF8);
         $csv->insertOne(['Prijmeni', 'Jmeno', 'Rok narozeni', 'Pocet hlasu']);
         $lists = ElectionList::all();
         $data = $this->calculateVotingResults($lists);
