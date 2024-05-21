@@ -31,7 +31,7 @@ class ElectionResults {
     }
 
     public function get_style($index) {
-        $percentage = 100*$this->data[$index]/$this->data[0];
+        $percentage = $this->data[0] > 0 ? 100 * $this->data[$index] / $this->data[0] : 0;
         return "width:$percentage%";
     }
 
