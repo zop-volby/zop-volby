@@ -11,11 +11,11 @@
     </div>
     <div class="row mt-4">
         <div class="col text-center">
-            <p>
+            <div class="alert alert-warning fw-bold">
                 Hlasovali jste elektronicky. 
                 Proto už nevolte korespondenčně (v případě korespondenční volby budou oba způsoby hlasování zneplatněny).
                 Zároveň už nebudete připuštěni k prezenčnímu hlasování.
-            </p>
+            </div>
             <p>Váš kód voliče: <b>{{$model->voter_code}}</b></p>
             <p>Hlasovali jste <b>{{$model->voting_time}}</b> (CET)</p>
         </div>
@@ -57,5 +57,13 @@
         </div>
     @endforeach
     </div></div>
+
+    <div class="row mt-4">
+        <div class="col text-center">
+            <p>
+                <x-secondary-link href="{{ route('voting.index') }}">Zavřít</x-secondary-link>
+            </p>
+        </div>
+    </div>
 
 </x-guest-layout>

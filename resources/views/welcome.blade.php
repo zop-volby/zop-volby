@@ -62,7 +62,7 @@
                         <div class="col text-center">
                             <p>Digitální hlasování je otevřeno do <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b> (CET).</p>
                             <p>Nejprve se přihlaste.</p>
-                            <p><x-primary-link href="{{ route('voting.index') }}">Přihlásit jako volič</x-primary-link></p>
+                            <p><x-primary-link href="{{ route('voting.index') }}">Přihlásit se jako volič</x-primary-link></p>
                         </div>
                     </div>
                 @endcan

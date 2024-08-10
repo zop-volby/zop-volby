@@ -60,11 +60,18 @@
     </div></div>
 
     <div class="text-end mt-3 mb-5">
-        <!-- <x-secondary-button type="submit" value="draft">Uložit rozpracované</x-secondary-button> -->
         <x-primary-button type="button" id="send-button">
             Odeslat hlasovací lístky
             <i class="bi bi-arrow-right-circle-fill"></i>
         </x-primary-button>
+    </div>
+
+    <div class="text-end mt-3 mb-5">
+        <p>
+            Pokud nechcete hlasovat dnes, můžete hlasování opustit a hlasovat později.
+            Hlasování se uzavře <b>{{ Election::find(1)->get_enddate() }} {{ Election::find(1)->get_endtime() }}</b> (CET).
+        </p>
+        <x-secondary-link href="{{ route('voting.index') }}">Opustit hlasování</x-secondary-link>
     </div>
 
     <div class="modal fade" id="confirm-voting" tabindex="-1" aria-labelledby="confirmVotingLabel" aria-hidden="true">
