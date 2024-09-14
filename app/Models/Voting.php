@@ -43,8 +43,8 @@ class Voting {
             // user didn't send any votes for this list
             return false;
         }
-
-        return str_contains($this->votes[$list], $nominee);
+        $votes = explode(',', $this->votes[$list]);
+        return in_array($nominee, $votes);
     }
 }
 

@@ -10,6 +10,7 @@ function GetVotingRecap(data: { Name: string | null, MaxVotes: number, Votes: nu
     }
     return "<span class='text-warning fw-bold'>" + data.Name + "</span>: " + data.Votes + " z " + data.MaxVotes + " možných hlasů.";
 }
+
 export function BindVotingView() {
     const sendButton = document.getElementById("send-button") as HTMLButtonElement;
     sendButton.addEventListener("click", () => {
@@ -39,6 +40,7 @@ export function BindVotingView() {
         const confirmButton = document.getElementById("confirm-button") as HTMLButtonElement;
         confirmButton.innerText = fullVote ? "Odeslat" : "Přesto odeslat";
     });
+
     for (let list of document.getElementsByClassName("voting-list")) {
         const listId = (list as HTMLElement).dataset.list;
         const votesBadge = document.getElementById(`badge_${listId}`) as HTMLElement;
@@ -67,11 +69,13 @@ export function BindVotingView() {
                         check.classList.remove("bi-square");
                         check.classList.add("bi-check-square");
                     }
-                } else {
+                } 
+                else {
                     values.splice(index, 1);
                     check.classList.remove("bi-check-square");
                     check.classList.add("bi-square");
                 }
+                
                 listField.value = values.join(",");
                 votesSpan.innerText = values.length.toString();
 

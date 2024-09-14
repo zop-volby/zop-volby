@@ -106,21 +106,26 @@ class VotingController extends Controller
         }
 
         $voting_id = base64_encode(uniqid(true) . random_bytes(10));
-
+        
         DB::transaction(function () use ($model, $request, $voting_id) {
             $voter = Voter::where('voter_code', $model->voter_code)->first();
-            $voter->voting_id = $voting_id;
-            $voter->save();
+            if ($voter->voting_id == null) {
+                // only store results for the first time
+                // otherwise ignore it
+                // it comes from the browser refresh
+                $voter->voting_id = $voting_id;
+                $voter->save();
 
-            $lists = ElectionList::all();
-            foreach ($lists as $list) {
-                $votes = $request->input('list_' . $list->id);
-                if ($votes != null) {
-                    $ballot = new Ballot();
-                    $ballot->voting_id = $voting_id;
-                    $ballot->list_id = $list->id;
-                    $ballot->votes = $votes;
-                    $ballot->save();
+                $lists = ElectionList::all();
+                foreach ($lists as $list) {
+                    $votes = $request->input('list_' . $list->id);
+                    if ($votes != null) {
+                        $ballot = new Ballot();
+                        $ballot->voting_id = $voting_id;
+                        $ballot->list_id = $list->id;
+                        $ballot->votes = $votes;
+                        $ballot->save();
+                    }
                 }
             }
         });
