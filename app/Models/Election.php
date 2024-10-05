@@ -17,10 +17,12 @@ class ElectionPhases {
 
 class ElectionResults {
     private $data;
+    private $count;
 
-    public function __construct($data)
+    public function __construct($count, $data)
     {
         $this->data = $data;
+        $this->count = $count;
     }
 
     public function get_size() {
@@ -46,6 +48,10 @@ class ElectionResults {
 
     public function get_label($index) {
         return $this->labels[$index];
+    }
+
+    public function voters_count() {
+        return $this->count;
     }
 }
 
@@ -116,7 +122,7 @@ class Election extends Model
             }
             $data[0] = max($data[1], $data[2], $data[3], $data[4]);
 
-            $this->results = new ElectionResults($data);
+            $this->results = new ElectionResults($voters->count(), $data);
         }
     }
 

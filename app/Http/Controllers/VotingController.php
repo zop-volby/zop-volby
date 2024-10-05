@@ -18,6 +18,7 @@ class VotingController extends Controller
     {
         Gate::authorize('digital-voting');
         $model = new Voting();
+        session(['status' => null]);
         return view('voting.index', compact('model'));
     }
 

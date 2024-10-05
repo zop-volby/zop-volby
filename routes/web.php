@@ -67,7 +67,7 @@ Route::get('voters/download', [VoterController::class, 'download'])->name('voter
 Route::resource('voters', VoterController::class)->middleware('auth');
 
 Route::get('voting', [VotingController::class, 'index'])->name('voting.index');
-Route::post('voting', [VotingController::class, 'store'])->name('voting.store');
+Route::post('voting', [VotingController::class, 'store'])->name('voting.store')->middleware('throttle:voter-login');
 
 Route::get('qr/{id}', [QrCodeController::class, 'index'])->name('qrcode');
 

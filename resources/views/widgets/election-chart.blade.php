@@ -1,6 +1,9 @@
 <div class="card">
     <h3 class="card-header">{{ __('Průběh voleb') }}</h3>
     <div class="card-body">
+        <div>
+            Celkem je <b>{{ $model->get_chart()->voters_count() }}</b> voličů.
+        </div>
         <table width="100%">
             @for ($i = 1; $i < $model->get_chart()->get_size(); $i++)
                 <tr>
