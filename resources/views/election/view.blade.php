@@ -13,7 +13,7 @@
     <div>
         <x-input-label for="hyperlink" :value="__('Odkaz')" />
         <x-text-input id="hyperlink" name="hyperlink" type="text" disabled value="{{$model->hyperlink}}"/>
-        <a target="_blank" href="{{ $item->hyperlink }}"><i class="bi bi-box-arrow-up-right"></i></a>
+        <a target="_blank" href="{{ $model->hyperlink }}"><i class="bi bi-box-arrow-up-right"></i></a>
     </div>
 
     <div>
