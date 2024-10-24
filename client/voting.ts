@@ -17,6 +17,7 @@ export function BindVotingView() {
         const lists = document.getElementsByClassName("voting-list");
         const data = [];
         let fullVote = true;
+        let emptyVote = true;
         for (let list of lists) {
             const listName = list.getElementsByClassName("list-name")[0].textContent;
             const listId = (list as HTMLElement).dataset.list;
@@ -29,6 +30,7 @@ export function BindVotingView() {
                 Votes: votes.length,
             });
             fullVote = fullVote && votes.length === maxVotes;
+            emptyVote = emptyVote && votes.length === 0;
         }
         const confirmPopup = new bootstrap.Modal("#confirm-voting", {});
         const confirmText = document.getElementById("voting-recap") as HTMLElement;        
@@ -36,7 +38,9 @@ export function BindVotingView() {
         confirmPopup.show();
         const warningText = document.getElementById("voting-warning") as HTMLElement;
         warningText.style.display = fullVote ? "none" : "block";
-        warningText.innerHTML = "Odevzdáváte neúplný hlasovací lístek. Opravdu chcete pokračovat?";
+        warningText.innerHTML = emptyVote 
+                                    ? "Odevzdáváte <b>prázdný</b> hlasovací lístek. Opravdu chcete pokračovat?"
+                                    : "Odevzdáváte neúplný hlasovací lístek. Opravdu chcete pokračovat?";
         const confirmButton = document.getElementById("confirm-button") as HTMLButtonElement;
         confirmButton.innerText = fullVote ? "Odeslat" : "Přesto odeslat";
     });

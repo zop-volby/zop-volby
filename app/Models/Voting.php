@@ -13,7 +13,12 @@ class Voting {
 
     public function load_ballots() {
         $ballots = Ballot::where('voting_id', $this->voting_id)->get();
-        $this->voting_time = date('d. m. Y H:i', strtotime($ballots->first()->created_at));
+        if ($ballots->isEmpty()) {
+            $this->voting_time = null;
+        }
+        else {
+            $this->voting_time = date('d. m. Y H:i', strtotime($ballots->first()->created_at));
+        }
 
         $this->votes = [];
         foreach ($ballots as $ballot) {
