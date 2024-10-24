@@ -27,6 +27,6 @@ class QrCodeController extends Controller
             'exp' => time() + 60 * 60 * 24 * 120    // 120 days
         ];
         $jwt = JWT::encode($payload, $key, 'HS256');
-        return QrCode::margin(10)->size(500)->generate($jwt);
+        return QrCode::margin(10)->size(500)->format('png')->generate($jwt);
     }
 }
