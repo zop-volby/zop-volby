@@ -184,16 +184,20 @@ class VoterController extends Controller
             $result = [];
             $nominees = $list->getAssignedNominees();
             foreach ($nominees as $nominee) {
-            $result[$nominee->id] = 0;
+                $result[$nominee->id] = 0;
             }
             $data[$list->id] = $result;
         }
         
         $ballots = Ballot::where('is_invalid', false)->get();
         foreach ($ballots as $ballot) {
+            if ($ballot->votes == '') {
+                continue;
+            }
+
             $votes = explode(',', $ballot->votes);
             foreach ($votes as $vote) {
-            $data[$ballot->list_id][$vote]++;
+                $data[$ballot->list_id][$vote]++;
             }
         }
 

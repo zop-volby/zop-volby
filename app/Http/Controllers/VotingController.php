@@ -119,14 +119,11 @@ class VotingController extends Controller
 
                 $lists = ElectionList::all();
                 foreach ($lists as $list) {
-                    $votes = $request->input('list_' . $list->id);
-                    if ($votes != null) {
-                        $ballot = new Ballot();
-                        $ballot->voting_id = $voting_id;
-                        $ballot->list_id = $list->id;
-                        $ballot->votes = $votes;
-                        $ballot->save();
-                    }
+                    $ballot = new Ballot();
+                    $ballot->voting_id = $voting_id;
+                    $ballot->list_id = $list->id;
+                    $ballot->votes = $request->input('list_' . $list->id) ?? "";
+                    $ballot->save();
                 }
             }
         });

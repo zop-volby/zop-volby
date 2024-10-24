@@ -40,6 +40,11 @@ class Voting {
             return 0;  
         }
 
+        if ($this->votes[$list_id] == '') {
+            // user sent an empty list of votes
+            return 0;
+        }
+
         return count(explode(',', $this->votes[$list_id]));
     }
 
